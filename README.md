@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rice Mill Website
 
-## Getting Started
+A modern, responsive website for a premium rice producer, built with Next.js, React, and Tailwind CSS.
 
-First, run the development server:
+## Features
+
+- Clean, minimalist design
+- Fully responsive for all device sizes
+- Component-based architecture
+- Optimized for performance
+- Firebase integration ready
+
+## Installation
+
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Project Structure
+
+- `/src/app`: Next.js app router pages
+- `/src/components`: Reusable React components
+  - `/ui`: Basic UI components (Button, Input)
+  - `/layout`: Layout components (Navbar, Footer)
+  - `/sections`: Page sections (Banner, Products, etc.)
+- `/src/lib`: Utility functions and data
+- `/public`: Static assets
+
+## Building for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Firebase Integration
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+This project is structured to easily integrate with Firebase:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Install Firebase:
 
-## Learn More
+   ```bash
+   npm install firebase
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Create a Firebase configuration file at `src/lib/firebase.js`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```javascript
+   import { initializeApp } from "firebase/app";
+   import { getFirestore } from "firebase/firestore";
+   import { getStorage } from "firebase/storage";
+   import { getAuth } from "firebase/auth";
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   const firebaseConfig = {
+     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+     projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+     storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+     messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+   };
 
-## Deploy on Vercel
+   const app = initializeApp(firebaseConfig);
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   export const db = getFirestore(app);
+   export const storage = getStorage(app);
+   export const auth = getAuth(app);
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Create a `.env.local` file in the project root with your Firebase credentials.
+
+## Deployment
+
+1. Install Firebase CLI:
+
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. Login to Firebase:
+
+   ```bash
+   firebase login
+   ```
+
+3. Initialize Firebase:
+
+   ```bash
+   firebase init
+   ```
+
+4. Deploy:
+   ```bash
+   npm run build
+   firebase deploy
+   ```
+
+## Customization
+
+- Modify the data in `src/lib/data.js` to update products and company information
+- Replace images in the `public/images` directory
+- Adjust colors in `tailwind.config.js` and `globals.css`
