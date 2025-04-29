@@ -53,10 +53,10 @@ export const features = [
 ];
 
 export const companyInfo = {
-  name: "Rice Mill Co.",
+  name: "Sajith Rice Mill.",
   email: "info@ricemill.com",
-  phone: "(123) 456-7890",
-  address: "123 Rice Mill Ave., Farmland, FL 12345",
+  phone: "(037) 22-12345",
+  address: "Sajith Rice Mill,Nadalagamuwa,Wadumunnegedara,Sri Lanka",
   social: {
     facebook: "https://facebook.com/ricemill",
     instagram: "https://instagram.com/ricemill",
