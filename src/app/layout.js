@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Rice Mill Co. - Premium Rice Direct from Our Fields",
+  title: "Sajith Rice Mill. - Premium Rice Direct from Our Fields",
   description:
     "High-quality rice sourced directly from our sustainable farms. Explore our premium basmati, jasmine, and organic long-grain varieties.",
 };
