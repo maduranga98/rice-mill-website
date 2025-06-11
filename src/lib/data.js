@@ -120,7 +120,7 @@ export const features = [
 export const companyInfo = {
   name: "Sajith Rice Mill.",
   email: "sajithricemill@gmail.com",
-  phone: "(037) 22-12345",
+  phone: "(077) 92-58293",
   address: "Sajith Rice Mill,Nadalagamuwa,Wadumunnegedara,Sri Lanka",
   social: {
     facebook: "https://facebook.com/ricemill",
