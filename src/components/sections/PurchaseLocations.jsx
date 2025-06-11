@@ -108,6 +108,18 @@ const PurchaseLocations = () => {
     zoom: 10,
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId.replace("#", ""));
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.offsetTop - navbarHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Load Leaflet CSS
@@ -260,39 +272,42 @@ const PurchaseLocations = () => {
   }, []);
 
   return (
-    <section className="py-12 bg-gradient-to-br from-green-50 via-white to-amber-50 mt-20">
+    <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-green-50 via-white to-amber-50 relative z-10">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-4">
-            <Store className="w-4 h-4 mr-2" />
+        {/* Header - Responsive */}
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-100 text-amber-700 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+            <Store className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Product Availability
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-green-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-green-900">
             Where Our Products
             <span className="text-amber-600 block">Are Available</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-xl lg:max-w-2xl mx-auto">
             Find Sajith Rice Mill's premium Sudu Kakulu at these locations
             across Sri Lanka
           </p>
         </div>
 
-        {/* Map and Towns */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
-          {/* Towns Grid */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Click on any location to view on map:
+        {/* Map and Towns - Responsive Container */}
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-3 sm:p-4 md:p-6 border border-gray-100 relative z-20">
+          {/* Towns Grid - Responsive */}
+          <div className="mb-4 sm:mb-6">
+            <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">
+              <span className="hidden sm:inline">
+                Click on any location to view on map:
+              </span>
+              <span className="sm:hidden">Tap a location:</span>
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-1.5 sm:gap-2">
               {purchaseLocations.map((location) => (
                 <button
                   key={location.id}
-                  className={`p-2 rounded-lg text-xs font-medium transition-all hover:shadow-md ${
+                  className={`p-1.5 sm:p-2 rounded-md sm:rounded-lg text-xs sm:text-sm font-medium transition-all hover:shadow-md touch-manipulation ${
                     selectedLocation?.id === location.id
                       ? "bg-amber-500 text-white shadow-md"
-                      : "bg-gray-100 text-gray-700 hover:bg-amber-100"
+                      : "bg-gray-100 text-gray-700 hover:bg-amber-100 active:bg-amber-200"
                   }`}
                   onClick={() => {
                     setSelectedLocation(location);
@@ -308,64 +323,82 @@ const PurchaseLocations = () => {
                     }
                   }}
                 >
-                  {location.name}
+                  <span className="block truncate">{location.name}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Map */}
-          <div
-            className="relative rounded-lg overflow-hidden border border-gray-200"
-            style={{ zIndex: 1 }}
-          >
+          {/* Map Container - Responsive Height and Z-Index Control */}
+          <div className="relative rounded-lg sm:rounded-xl overflow-hidden border border-gray-200 relative z-0 isolation-auto">
             <div
               ref={mapRef}
-              className="w-full h-[400px] relative"
+              className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] relative"
               style={{ zIndex: 1 }}
               role="application"
               aria-label="Map showing locations where Sajith Rice Mill products are available"
             />
 
-            {/* Map Loading Indicator */}
+            {/* Map Loading Indicator - Responsive */}
             <div className="absolute inset-0 flex items-center justify-center bg-gray-50 map-loading z-10">
               <div className="text-center">
-                <div className="inline-block w-6 h-6 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-2"></div>
-                <p className="text-gray-600 text-sm">Loading map...</p>
+                <div className="inline-block w-5 h-5 sm:w-6 sm:h-6 border-3 sm:border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-2"></div>
+                <p className="text-gray-600 text-xs sm:text-sm">
+                  Loading map...
+                </p>
               </div>
             </div>
           </div>
+
+          {/* Selected Location Info - Mobile Only */}
+          {selectedLocation && (
+            <div className="mt-3 sm:hidden bg-amber-50 rounded-lg p-3 border border-amber-200">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-amber-800 text-sm">
+                    {selectedLocation.name}
+                  </p>
+                  <p className="text-xs text-amber-600">
+                    {selectedLocation.lat.toFixed(4)},{" "}
+                    {selectedLocation.lng.toFixed(4)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Contact for More Info */}
-        <div className="mt-12 text-center">
-          <div className="bg-gradient-to-r from-green-600 to-amber-600 rounded-xl p-6 text-white">
-            <h3 className="text-xl font-bold mb-3">
+        {/* Contact for More Info - Responsive */}
+        <div className="mt-8 sm:mt-10 md:mt-12 text-center relative z-20">
+          <div className="bg-gradient-to-r from-green-600 to-amber-600 rounded-lg sm:rounded-xl p-4 sm:p-6 text-white">
+            <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">
               Can't Find a Location Near You?
             </h3>
-            <p className="text-green-100 mb-4 max-w-xl mx-auto text-sm">
+            <p className="text-green-100 mb-3 sm:mb-4 max-w-lg lg:max-w-xl mx-auto text-xs sm:text-sm">
               Contact us to find the nearest retailer or discuss wholesale
               opportunities.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
               <a
-                href="tel:+94372212345"
-                className="inline-flex items-center justify-center px-4 py-2 bg-white text-green-600 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors"
+                href="tel:+94779258293"
+                className="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-white text-green-600 rounded-md sm:rounded-lg text-xs sm:text-sm font-semibold hover:bg-gray-50 active:bg-gray-100 transition-colors touch-manipulation"
               >
-                <Phone className="w-4 h-4 mr-2" />
-                (037) 22-12345
+                <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+                (077) 92-58293
               </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center px-4 py-2 border-2 border-white text-white rounded-lg text-sm font-semibold hover:bg-white hover:text-green-600 transition-colors"
+              <button
+                onClick={() => scrollToSection("#contact")}
+                className="inline-flex items-center justify-center px-3 sm:px-4 py-2 border-2 border-white text-white rounded-md sm:rounded-lg text-xs sm:text-sm font-semibold hover:bg-white hover:text-green-600 active:bg-gray-100 active:text-green-700 transition-colors touch-manipulation"
               >
                 Contact Form
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Custom Styles - Z-Index Control */}
       <style jsx>{`
         .map-loading {
           transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
@@ -391,6 +424,28 @@ const PurchaseLocations = () => {
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: #d97706;
+        }
+
+        /* Ensure map stays below navbar */
+        :global(.leaflet-container) {
+          position: relative !important;
+          z-index: 1 !important;
+        }
+
+        :global(.leaflet-control-container) {
+          z-index: 2 !important;
+        }
+
+        :global(.leaflet-popup-pane) {
+          z-index: 3 !important;
+        }
+
+        :global(.leaflet-marker-pane) {
+          z-index: 2 !important;
+        }
+
+        :global(.leaflet-overlay-pane) {
+          z-index: 1 !important;
         }
       `}</style>
     </section>
