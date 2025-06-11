@@ -6,6 +6,7 @@ import Story from "@/components/sections/Story";
 import Products from "@/components/sections/Products";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Contact from "@/components/sections/Contact";
+import PurchaseLocations from "@/components/sections/PurchaseLocations";
 
 export default function Home() {
   return (
@@ -24,6 +25,10 @@ export default function Home() {
 
       <section id="why-choose-us">
         <WhyChooseUs />
+      </section>
+
+      <section id="purchase-locations">
+        <PurchaseLocations />
       </section>
 
       <section id="contact">

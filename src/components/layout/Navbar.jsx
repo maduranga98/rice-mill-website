@@ -57,6 +57,12 @@ const Navbar = () => {
               Why Choose Us
             </Link>
             <Link
+              href="#purchase-locations"
+              className="text-gray-700 hover:text-amber-500 font-medium"
+            >
+              Where to Buy
+            </Link>
+            <Link
               href="#contact"
               className="text-gray-700 hover:text-amber-500 font-medium"
             >
@@ -120,6 +126,13 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Why Choose Us
+              </Link>
+              <Link
+                href="#purchase-locations"
+                className="text-gray-700 hover:text-amber-500 font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Where to Buy
               </Link>
               <Link
                 href="#contact"
