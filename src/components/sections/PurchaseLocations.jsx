@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { MapPin, Store, Navigation, Phone } from "lucide-react";
 
 const PurchaseLocations = () => {
   const mapRef = useRef(null);
@@ -172,7 +171,7 @@ const PurchaseLocations = () => {
         "@type": "Organization",
         name: "Sajith Rice Mill",
         "@id": `${
-          process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+          process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
         }/#organization`,
       },
       areaServed: purchaseLocations.map((location) => ({
@@ -193,7 +192,7 @@ const PurchaseLocations = () => {
       offers: {
         "@type": "Offer",
         description:
-          "Premium rice varieties delivery including සුදු කකුළු, සම්බා කකුළු, and bulk orders",
+          "Premium rice varieties delivery including සුදු කැකුළු, සම්බා කැකුළු, and bulk orders",
         availability: "InStock",
       },
       keywords:
@@ -466,8 +465,8 @@ const PurchaseLocations = () => {
 
         <h3>Available Products - ලබා ගත හැකි නිෂ්පාදන</h3>
         <p>
-          සුදු කකුළු (Sudu Kakulu), සම්බා කකුළු (Samba Kakulu), රතු කකුළු (Ratu
-          Kakulu). Package sizes: 5kg, 10kg, 25kg. Home delivery (ගෙදර
+          සුදු කැකුළු (Sudu Kakulu), සම්බා කැකුළු (Samba Kakulu), රතු කැකුළු
+          (Ratu Kakulu). Package sizes: 5kg, 10kg, 25kg. Home delivery (ගෙදර
           බෙදාහැරීම), bulk orders (තොග ඇණවුම්), wholesale prices (තොග මිල),
           restaurant supply (අවන්හල් සැපයුම්).
         </p>
@@ -481,7 +480,7 @@ const PurchaseLocations = () => {
       </div>
 
       <section
-        className="py-12 bg-gradient-to-br from-green-50 via-white to-amber-50 mt-20"
+        className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-green-50 via-white to-amber-50"
         role="region"
         aria-labelledby="locations-heading"
         itemScope
@@ -489,30 +488,36 @@ const PurchaseLocations = () => {
       >
         <div className="container mx-auto px-4">
           {/* Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-4">
-              <Store className="w-4 h-4 mr-2" />
+          <div className="text-center mb-12 lg:mb-16">
+            {/* Section Badge */}
+            <div className="inline-flex items-center px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-6">
               Island-wide Availability
             </div>
-            <h2
-              id="locations-heading"
-              className="text-3xl md:text-4xl font-bold mb-6 text-green-900"
-              itemProp="name"
-            >
-              Where Our Products
-              <span className="text-amber-600 block">Are Available</span>
-            </h2>
-            <p
-              className="text-lg text-gray-600 max-w-2xl mx-auto"
-              itemProp="description"
-            >
-              Find Sajith Rice Mill's premium rice varieties at these locations
-              across Sri Lanka with reliable delivery service
-            </p>
+
+            {/* Main Heading - Consistent Typography */}
+            <div className="mb-8">
+              <h2
+                id="locations-heading"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-900 leading-tight mb-4"
+                itemProp="name"
+              >
+                Where Our Products
+                <span className="text-amber-600 block">Are Available</span>
+              </h2>
+
+              {/* Subtitle */}
+              <p
+                className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                itemProp="description"
+              >
+                Find Sajith Rice Mill's premium rice varieties at these
+                locations across Sri Lanka with reliable delivery service
+              </p>
+            </div>
           </div>
 
           {/* Map and Towns */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+          <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 mb-12 lg:mb-16">
             {/* All Locations Grid */}
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
@@ -558,86 +563,61 @@ const PurchaseLocations = () => {
                 </div>
               )}
             </div>
-
-            {/* Selected Location Info */}
-            {selectedLocation && (
-              <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
-                <h4 className="font-semibold text-amber-800 mb-2">
-                  Selected Location: {selectedLocation.name} -{" "}
-                  {selectedLocation.sinhalaName}
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm text-amber-700">
-                  <div>District: {selectedLocation.district}</div>
-                  <div>Province: {selectedLocation.province}</div>
-                  <div>Rice Delivery: Available</div>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Service Information */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 lg:mb-16">
             <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Store className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 14+ Locations
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm md:text-base text-gray-600">
                 Available across Western, North Western, and Sabaragamuwa
                 provinces
               </p>
             </div>
 
             <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 text-center">
-              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Navigation className="w-6 h-6 text-amber-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Fast Delivery
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm md:text-base text-gray-600">
                 Quick delivery service to all listed locations with bulk order
                 options
               </p>
             </div>
 
             <div className="bg-white rounded-xl p-6 shadow-md border border-gray-100 text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Easy Ordering
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm md:text-base text-gray-600">
                 Call (077) 92-58293 for orders and delivery arrangements
               </p>
             </div>
           </div>
 
           {/* Contact for More Info */}
-          <div className="mt-12 text-center">
+          <div className="text-center">
             <div className="bg-gradient-to-r from-green-600 to-amber-600 rounded-xl p-6 text-white">
-              <h3 className="text-xl font-bold mb-3">
+              <h3 className="text-xl font-semibold mb-3">
                 Can't Find a Location Near You?
               </h3>
-              <p className="text-green-100 mb-4 max-w-xl mx-auto text-sm">
+              <p className="text-green-100 mb-4 max-w-xl mx-auto text-sm md:text-base">
                 Contact us to find the nearest retailer or discuss wholesale
                 opportunities and custom delivery arrangements.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
                   href="tel:+94779258293"
-                  className="inline-flex items-center justify-center px-4 py-2 bg-white text-green-600 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-white text-green-600 rounded-lg text-sm md:text-base font-semibold hover:bg-gray-50 transition-colors"
                   aria-label="Call Sajith Rice Mill"
                 >
-                  <Phone className="w-4 h-4 mr-2" />
                   (077) 92-58293
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center justify-center px-4 py-2 border-2 border-white text-white rounded-lg text-sm font-semibold hover:bg-white hover:text-green-600 transition-colors"
+                  className="inline-flex items-center justify-center px-4 py-2 border-2 border-white text-white rounded-lg text-sm md:text-base font-semibold hover:bg-white hover:text-green-600 transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     const contactSection = document.getElementById("contact");

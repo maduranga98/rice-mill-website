@@ -3,7 +3,7 @@ export const products = [
     id: "sudu-kakulu-5kg",
     name: "Sudu Kakulu Rice",
     nameMultilingual:
-      "Sudu Kakulu Rice – 5kg | සුදු කකුළු සහල් – 5kg | வெள்ளை ககுलு அரிசி – 5kg",
+      "Sudu Kakulu Rice – 5kg | සුදු කැකුළු සහල් – 5kg | வெள்ளை ககுलு அரிசி – 5kg",
     image: "/products/2.jpg",
     size: "5kg",
     weight: "5",
@@ -21,7 +21,7 @@ export const products = [
     id: "sudu-kakulu-10kg",
     name: "Sudu Kakulu Rice",
     nameMultilingual:
-      "Sudu Kakulu Rice – 10kg | සුදු කකුළු සහල් – 10kg | வெள்ளை ககুலு அரিசி – 10kg",
+      "Sudu Kakulu Rice – 10kg | සුදු කැකුළු සහල් – 10kg | வெள்ளை ககুலு அரিசி – 10kg",
     image: "/products/5.jpg",
     size: "10kg",
     weight: "10",
@@ -38,7 +38,7 @@ export const products = [
     id: "sudu-kakulu-25kg",
     name: "Sudu Kakulu Rice",
     nameMultilingual:
-      "Sudu Kakulu Rice – 25kg | සුදු කකුළු සහල් – 25kg | வெள்ளை ககুலு अरिसি – 25kg",
+      "Sudu Kakulu Rice – 25kg | සුදු කැකුළු සහල් – 25kg | வெள்ளை ககুலு अरिसি – 25kg",
     image: "/products/3.jpg",
     size: "25kg",
     weight: "25",
@@ -56,7 +56,7 @@ export const products = [
     id: "samba-kakulu-5kg",
     name: "Samba Kakulu Rice",
     nameMultilingual:
-      "Samba Kakulu Rice – 5kg | සම්බා කකුළු සහල් – 5kg | சம்பா ககுলு அरিசি – 5kg",
+      "Samba Kakulu Rice – 5kg | සම්බා කැකුළු සහල් – 5kg | சம்பா ககுলு அरিசি – 5kg",
     image: "/products/1.webp",
     size: "5kg",
     weight: "5",
@@ -74,7 +74,7 @@ export const products = [
     id: "samba-kakulu-10kg",
     name: "Samba Kakulu Rice",
     nameMultilingual:
-      "Samba Kakulu Rice – 10kg | සම්බා කකුළු සහල් – 10kg | சம்பா ககுলு அরिசি – 10kg",
+      "Samba Kakulu Rice – 10kg | සම්බා කැකුළු සහල් – 10kg | சம்பா ககுলு அরिசি – 10kg",
     image: "/products/4.jpg",
     size: "10kg",
     weight: "10",

@@ -1,0 +1,92 @@
+# Robots.txt for Sajith Rice Mill
+# Premium Sri Lankan Rice Supplier
+# Website: https://www.sajithricemill.com/
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Allow specific search engines with optimized crawling
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Disallow crawling of admin or sensitive areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.env
+Disallow: /config/
+
+# Disallow crawling of development/testing files
+Disallow: /test/
+Disallow: /dev/
+Disallow: /*.json$
+
+# Allow crawling of important assets
+Allow: /products/
+Allow: /images/
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /sajith-logo.png
+Allow: /hero*.webp
+Allow: /image.webp
+
+# Sitemap location
+Sitemap: https://www.sajithricemill.com//sitemap.xml
+
+# Additional sitemaps (if you create them later)
+# Sitemap: https://www.sajithricemill.com//sitemap-products.xml
+# Sitemap: https://www.sajithricemill.com//sitemap-locations.xml
+
+# Cache directive for faster crawling
+# This helps search engines understand page update frequency
+
+# Homepage and main sections - updated frequently
+# /                    - weekly
+# /#products          - weekly  
+# /#purchase-locations - weekly
+
+# About and static content - updated monthly
+# /#story             - monthly
+# /#why-choose-us     - monthly
+# /#contact           - monthly
+
+# Host directive (helps with international SEO)
+Host: https://www.sajithricemill.com/
+
+# Request rate (optional - helps prevent server overload)
+Request-rate: 1/1s
+
+# Visit time (optional - preferred crawling hours in UTC)
+Visit-time: 1-23
+
+# Clean URLs directive
+Clean-param: utm_source
+Clean-param: utm_medium  
+Clean-param: utm_campaign
+Clean-param: fbclid
+Clean-param: gclid
+
+# Comments for SEO context:
+# This robots.txt is optimized for:
+# - Sri Lankan rice business (Sajith Rice Mill)
+# - Local SEO in Sri Lanka
+# - E-commerce rice products
+# - Service area coverage
+# - Multi-language content (English, Sinhala, Tamil)
+# - Mobile-first indexing
+# - Premium rice supplier targeting

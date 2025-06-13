@@ -14,9 +14,9 @@ const pageStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "@id": `${
-    process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
   }/#webpage`,
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
   name: "Sajith Rice Mill - Premium Sri Lankan Rice | සුදු කැකුළු & සම්බා කැකුළු",
   description:
     "J.A. Santha Nimal&apos;s premium Sri Lankan rice mill offering සුදු කැකුළු, සම්බා කැකුළු, රතු කැකුළු at best prices since 2009. Chemical-free traditional කැකුළු. Island-wide delivery.",
@@ -26,9 +26,9 @@ const pageStructuredData = {
   isPartOf: {
     "@type": "WebSite",
     "@id": `${
-      process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
     }/#website`,
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
     name: "Sajith Rice Mill",
     description:
       "Premium Sri Lankan Rice Supplier - කැකුළු ප්‍රිමියම් සැපයුම්කරු",
@@ -36,7 +36,7 @@ const pageStructuredData = {
       "@type": "Organization",
       name: "Sajith Rice Mill",
       "@id": `${
-        process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
       }/#organization`,
     },
     potentialAction: [
@@ -45,7 +45,8 @@ const pageStructuredData = {
         target: {
           "@type": "EntryPoint",
           urlTemplate: `${
-            process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+            process.env.NEXT_PUBLIC_SITE_URL ||
+            "https://www.sajithricemill.com/"
           }/?s={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
@@ -55,7 +56,7 @@ const pageStructuredData = {
   mainEntity: {
     "@type": "Organization",
     "@id": `${
-      process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
     }/#organization`,
   },
   breadcrumb: {
@@ -65,7 +66,8 @@ const pageStructuredData = {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
+        item:
+          process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
       },
     ],
   },
@@ -152,7 +154,7 @@ const productCategoryData = {
   description:
     "Complete range of traditional කැකුළු varieties including සුදු කැකුළු, සම්බා කැකුළු, and රතු කැකුළු at best prices",
   url: `${
-    process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
   }/#products`,
   mainEntity: {
     "@type": "ItemList",
