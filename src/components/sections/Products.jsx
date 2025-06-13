@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Eye, Phone, ArrowRight, Package, Award, X } from "lucide-react";
 
-// Updated product data with bag sizes and correct details
+// Enhanced product data with SEO keywords
 const products = [
   {
     id: "sudu-kakulu-5kg",
     name: "Sudu Kakulu Rice - 5kg",
     nameMultilingual:
-      "Sudu Kakulu Rice – 5kg | සුදු කකුළු සහල් – 5kg | வெள்ளை ககுলு அরিசি – 5kg",
+      "Sudu Kakulu Rice – 5kg | සුදු කකුළු සහල් – 5kg | வெள்ளை ககுலు அரিசি – 5kg",
     image: "/products/2.webp",
     size: "5kg",
     weight: "5",
@@ -21,12 +21,16 @@ const products = [
     tagline: "Your everyday choice for fluffy, light rice.",
     type: "sudu",
     isPopular: false,
+    keywords:
+      "සුදු කකුළු, white rice, premium rice, daily meals rice, easy cook rice",
+    category: "Premium White Rice",
+    uses: "Daily meals, porridge, family cooking",
   },
   {
     id: "sudu-kakulu-10kg",
     name: "Sudu Kakulu Rice - 10kg",
     nameMultilingual:
-      "Sudu Kakulu Rice – 10kg | සුදු කකුළු සහල් – 10kg | வெள்ளை קקুলু அரিसി – 10kg",
+      "Sudu Kakulu Rice – 10kg | සුදු කකුළු සහල් – 10kg | வெள்ளை ககுলু அরிசி – 10kg",
     image: "/products/5.webp",
     size: "10kg",
     weight: "10",
@@ -37,12 +41,16 @@ const products = [
     tagline: "Perfect for daily family meals.",
     type: "sudu",
     isPopular: false,
+    keywords:
+      "සුදු කකුළු, family pack rice, bulk rice, household rice, 10kg rice",
+    category: "Family Pack Rice",
+    uses: "Family meals, traditional dishes, daily cooking",
   },
   {
     id: "sudu-kakulu-25kg",
     name: "Sudu Kakulu Rice - 25kg",
     nameMultilingual:
-      "Sudu Kakulu Rice – 25kg | සුදු කකුළු සහල් – 25kg | வெள்ளை ককুলு अরिসि – 25kg",
+      "Sudu Kakulu Rice – 25kg | සුදු කකුළු සහල් – 25kg | வெள்ளை ககুলு अরिসि – 25kg",
     image: "/products/3.webp",
     size: "25kg",
     weight: "25",
@@ -54,12 +62,16 @@ const products = [
     tagline: "Trusted by families and businesses alike.",
     type: "sudu",
     isPopular: false,
+    keywords:
+      "සුදු කකුළු, bulk rice, wholesale rice, restaurant rice, 25kg rice, commercial rice",
+    category: "Bulk Commercial Rice",
+    uses: "Restaurants, large households, commercial kitchens, wholesale",
   },
   {
     id: "samba-kakulu-5kg",
     name: "Samba Kakulu Rice - 5kg",
     nameMultilingual:
-      "Samba Kakulu Rice – 5kg | සම්බා කකුළු සහල් – 5kg | சம்பா ககுলு अरिसि – 5kg",
+      "Samba Kakulu Rice – 5kg | සම්බා කකුළු සහල් – 5kg | சம்பா ককুলু अরিসि – 5kg",
     image: "/products/1.webp",
     size: "5kg",
     weight: "5",
@@ -71,12 +83,16 @@ const products = [
     tagline: "Savor the taste of quality Samba.",
     type: "samba",
     isPopular: false,
+    keywords:
+      "සම්බා කකුළු, samba rice, aromatic rice, premium rice, festive rice, short grain rice",
+    category: "Premium Samba Rice",
+    uses: "Biryani, fried rice, special occasions, celebrations",
   },
   {
     id: "samba-kakulu-25kg",
     name: "Samba Kakulu Rice - 25kg",
     nameMultilingual:
-      "Samba Kakulu Rice – 25kg | සම්බා කකුළු සහල් – 25kg | சம்பா ககুלு अरिসি – 25kg",
+      "Samba Kakulu Rice – 25kg | සම්බා කකුළු සහල් – 25kg | சம்பா קקুலு अরिসি – 25kg",
     image: "/products/4.webp",
     size: "25kg",
     weight: "25",
@@ -88,10 +104,14 @@ const products = [
     tagline: "Premium Sri Lankan firm-grain rice for wholesale needs.",
     type: "samba",
     isPopular: false,
+    keywords:
+      "සම්බා කකුළු, bulk samba rice, commercial samba, restaurant rice, traditional rice, 25kg samba",
+    category: "Bulk Premium Samba",
+    uses: "Commercial kitchens, large families, traditional cooking, wholesale",
   },
 ];
 
-// Responsive Product Card Component
+// Enhanced Product Card Component
 const ProductCard = ({ product, onLearnMore, onContactUs }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -103,10 +123,12 @@ const ProductCard = ({ product, onLearnMore, onContactUs }) => {
   };
 
   return (
-    <div
+    <article
       className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-green-200 flex flex-col h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      itemScope
+      itemType="https://schema.org/Product"
     >
       {/* Popular Badge */}
       {product.isPopular && (
@@ -115,14 +137,19 @@ const ProductCard = ({ product, onLearnMore, onContactUs }) => {
         </div>
       )}
 
-      {/* Product Image - Responsive */}
+      {/* Product Image - Enhanced Alt Text */}
       <div className="relative aspect-[3/4] overflow-hidden">
         <img
           src={product.image}
-          alt={`${product.name} ${product.size}`}
+          alt={`${
+            product.name
+          } - Sajith Rice Mill premium ${product.category.toLowerCase()} from Sri Lanka - ${
+            product.uses
+          }`}
           className={`w-full h-full object-cover transition-transform duration-500 ${
             isHovered ? "scale-105" : "scale-100"
           }`}
+          itemProp="image"
         />
 
         {/* Weight Badge - Responsive */}
@@ -135,28 +162,38 @@ const ProductCard = ({ product, onLearnMore, onContactUs }) => {
         </div>
       </div>
 
-      {/* Product Info - Responsive Padding */}
+      {/* Product Info - Enhanced with Schema */}
       <div className="p-3 sm:p-4 lg:p-5 flex flex-col flex-grow">
         {/* Product Name */}
         <div className="mb-2 sm:mb-3">
-          <h3 className="font-bold text-sm sm:text-base lg:text-lg text-gray-900 mb-1 group-hover:text-green-700 transition-colors line-clamp-2">
+          <h3
+            className="font-bold text-sm sm:text-base lg:text-lg text-gray-900 mb-1 group-hover:text-green-700 transition-colors line-clamp-2"
+            itemProp="name"
+          >
             {product.name}
           </h3>
-          <div className="text-xs text-gray-500 font-medium">
+          <div
+            className="text-xs text-gray-500 font-medium"
+            itemProp="category"
+          >
             {product.type === "samba" ? "Samba Kakulu" : "Sudu Kakulu"}
           </div>
         </div>
 
-        {/* Description - Responsive Text */}
-        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-3 flex-grow mb-3 sm:mb-4">
+        {/* Description */}
+        <p
+          className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-3 flex-grow mb-3 sm:mb-4"
+          itemProp="description"
+        >
           {product.description}
         </p>
 
-        {/* Action Buttons - Responsive */}
+        {/* Action Buttons */}
         <div className="space-y-1.5 sm:space-y-2 mt-auto">
           <button
             onClick={() => onLearnMore(product)}
             className="w-full bg-green-600 text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center group/btn text-xs sm:text-sm"
+            aria-label={`Learn more about ${product.name}`}
           >
             <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Learn More
@@ -166,17 +203,30 @@ const ProductCard = ({ product, onLearnMore, onContactUs }) => {
           <button
             onClick={onContactUs}
             className="w-full border-2 border-green-600 text-green-600 py-2 sm:py-2.5 px-3 sm:px-4 rounded-lg font-medium hover:bg-green-50 transition-colors flex items-center justify-center text-xs sm:text-sm"
+            aria-label={`Contact us about ${product.name}`}
           >
             <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Contact Us
           </button>
         </div>
+
+        {/* Hidden Schema Data */}
+        <div className="sr-only">
+          <span itemProp="brand">Sajith Rice Mill</span>
+          <span itemProp="productID">{product.id}</span>
+          <span itemProp="keywords">{product.keywords}</span>
+          <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
+            <span itemProp="availability">InStock</span>
+            <span itemProp="priceCurrency">LKR</span>
+            <span itemProp="price">Best Price</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </article>
   );
 };
 
-// Fixed Responsive Product Modal
+// Enhanced Product Modal
 const ProductModal = ({ product, isOpen, onClose }) => {
   if (!isOpen || !product) return null;
 
@@ -198,12 +248,18 @@ const ProductModal = ({ product, isOpen, onClose }) => {
     <div
       className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto"
       onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="product-modal-title"
     >
       <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl my-4 sm:my-8 flex flex-col shadow-2xl max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)]">
-        {/* Modal Header - Responsive */}
+        {/* Modal Header */}
         <div className="flex items-center justify-between p-4 sm:p-5 lg:p-6 border-b bg-white rounded-t-lg sm:rounded-t-xl lg:rounded-t-2xl flex-shrink-0">
           <div className="flex-1 pr-3 min-w-0">
-            <h2 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 truncate">
+            <h2
+              id="product-modal-title"
+              className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 truncate"
+            >
               {product.name}
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 mt-1">
@@ -215,22 +271,23 @@ const ProductModal = ({ product, isOpen, onClose }) => {
           <button
             onClick={onClose}
             className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors flex-shrink-0 ml-2"
+            aria-label="Close product details"
           >
             <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 
-        {/* Modal Content - Responsive Scrolling */}
+        {/* Modal Content */}
         <div className="flex-1 overflow-y-auto min-h-0">
           <div className="p-4 sm:p-5 lg:p-6 space-y-4 sm:space-y-5 lg:space-y-6">
-            {/* Product Image and Basic Info - Responsive Layout */}
+            {/* Product Image and Basic Info */}
             <div className="flex flex-col space-y-4 sm:space-y-5">
               {/* Image */}
               <div className="w-full flex justify-center">
                 <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-white rounded-lg border border-gray-200 overflow-hidden">
                   <img
                     src={product.image}
-                    alt={product.nameMultilingual}
+                    alt={`${product.nameMultilingual} - Premium quality ${product.category} from Sajith Rice Mill`}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded-md text-xs font-bold">
@@ -297,6 +354,16 @@ const ProductModal = ({ product, isOpen, onClose }) => {
               </p>
             </div>
 
+            {/* Best Uses */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-900 text-sm">
+                Best Uses:
+              </h3>
+              <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
+                <p className="text-sm text-blue-700">{product.uses}</p>
+              </div>
+            </div>
+
             {/* Quality Highlight */}
             <div className="bg-amber-50 rounded-lg p-3 sm:p-4 border border-amber-200">
               <h4 className="font-semibold text-amber-800 mb-2 text-sm">
@@ -309,7 +376,7 @@ const ProductModal = ({ product, isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Modal Footer - Responsive */}
+        {/* Modal Footer */}
         <div className="p-4 sm:p-5 lg:p-6 border-t bg-gray-50 rounded-b-lg sm:rounded-b-xl lg:rounded-b-2xl flex-shrink-0">
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <button
@@ -332,10 +399,68 @@ const ProductModal = ({ product, isOpen, onClose }) => {
   );
 };
 
-// Main Products Section Component
+// Main Products Section Component with SEO
 const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Add structured data for products
+  useEffect(() => {
+    const productsSchema = {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "Premium Sri Lankan Rice Products",
+      description:
+        "Complete range of traditional rice varieties including Sudu Kakulu and Samba Kakulu rice from Sajith Rice Mill",
+      url: `${
+        process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+      }/#products`,
+      mainEntity: {
+        "@type": "ItemList",
+        name: "Rice Products Collection",
+        description:
+          "Premium Sri Lankan rice varieties - සුදු කකුළු and සම්බා කකුළු",
+        numberOfItems: products.length,
+        itemListElement: products.map((product, index) => ({
+          "@type": "Product",
+          position: index + 1,
+          name: product.name,
+          description: product.description,
+          category: product.category,
+          brand: "Sajith Rice Mill",
+          productID: product.id,
+          image: `${
+            process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+          }${product.image}`,
+          keywords: product.keywords,
+          offers: {
+            "@type": "Offer",
+            availability: "InStock",
+            priceCurrency: "LKR",
+            price: "Best Price",
+          },
+        })),
+      },
+      provider: {
+        "@type": "Organization",
+        name: "Sajith Rice Mill",
+        description: "Premium Sri Lankan rice supplier since 2009",
+      },
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(productsSchema);
+    script.id = "products-schema";
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.getElementById("products-schema");
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
 
   const handleLearnMore = (product) => {
     setSelectedProduct(product);
@@ -355,49 +480,113 @@ const Products = () => {
   };
 
   return (
-    <section
-      id="products"
-      className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-white via-green-50/30 to-amber-50/30"
-    >
-      <div className="container mx-auto px-4">
-        {/* Header - Responsive */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-            <Package className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-            Premium Rice Collection
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-green-900">
-            Our <span className="text-amber-600">Premium</span> Products
-          </h2>
-
-          <p className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-2xl lg:max-w-3xl mx-auto mb-6 sm:mb-8">
-            Discover our carefully selected range of premium quality rice
-            varieties, each crafted with traditional methods and modern quality
-            standards.
-          </p>
-        </div>
-
-        {/* Products Grid - Responsive */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 xl:gap-8 max-w-7xl mx-auto mb-8 sm:mb-12 lg:mb-16">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onLearnMore={handleLearnMore}
-              onContactUs={handleContactUs}
-            />
-          ))}
-        </div>
+    <>
+      {/* Hidden SEO content with Sinhala keywords */}
+      <div className="sr-only">
+        <h2>Sajith Rice Mill Products - සජිත් සහල් මෝල නිෂ්පාදන</h2>
+        <p>
+          Premium Sri Lankan rice varieties available: සුදු කකුළු (Sudu Kakulu),
+          සම්බා කකුළු (Samba Kakulu), රතු කකුළු (Ratu Kakulu). Available in 5kg,
+          10kg, 25kg packages. Best prices for bulk orders, wholesale rates,
+          restaurant supplies, family packs. ප්‍රිමියම් තත්ත්වය, තොග මිල, පවුල්
+          ඇසුරුම්, අවන්හල් සැපයුම්.
+        </p>
+        <p>
+          Rice product categories: Premium white rice (ප්‍රිමියම් සුදු සහල්),
+          Traditional samba rice (සම්ප්‍රදායික සම්බා සහල්), Organic rice
+          varieties (ඔර්ගනික් සහල් වර්ග), Chemical-free rice (රසායනික නොමැති
+          සහල්), Daily cooking rice (දෛනික පිසීම සඳහා සහල්).
+        </p>
+        <p>
+          Uses: Daily meals (දෛනික ආහාර), porridge (කැඳ), biryani (බිරියානි),
+          fried rice (සහල් බත්), special occasions (විශේෂ අවස්ථා), commercial
+          cooking (වාණිජ පිසීම), family cooking (පවුල් පිසීම).
+        </p>
       </div>
 
-      {/* Product Modal */}
-      <ProductModal
-        product={selectedProduct}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
-    </section>
+      <section
+        id="products"
+        className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-white via-green-50/30 to-amber-50/30"
+        role="region"
+        aria-labelledby="products-heading"
+        itemScope
+        itemType="https://schema.org/CollectionPage"
+      >
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <Package className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+              Premium Rice Collection
+            </div>
+
+            <h2
+              id="products-heading"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-green-900"
+              itemProp="name"
+            >
+              Our <span className="text-amber-600">Premium</span> Products
+            </h2>
+
+            <p
+              className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-2xl lg:max-w-3xl mx-auto mb-6 sm:mb-8"
+              itemProp="description"
+            >
+              Discover our carefully selected range of premium quality rice
+              varieties, each crafted with traditional methods and modern
+              quality standards.
+            </p>
+          </div>
+
+          {/* Products Grid */}
+          <div
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 xl:gap-8 max-w-7xl mx-auto mb-8 sm:mb-12 lg:mb-16"
+            role="list"
+            aria-label="Rice products collection"
+          >
+            {products.map((product, index) => (
+              <div key={product.id} role="listitem">
+                <ProductCard
+                  product={product}
+                  onLearnMore={handleLearnMore}
+                  onContactUs={handleContactUs}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Additional Product Information */}
+          <div className="text-center">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-white rounded-xl p-6 shadow-md border border-gray-100 max-w-2xl mx-auto">
+              <div className="text-center sm:text-left flex-1">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">
+                  Need Custom Orders?
+                </h3>
+                <p className="text-sm text-gray-600 mb-1">
+                  Bulk orders, wholesale rates, and custom packaging available
+                </p>
+                <p className="text-xs text-green-600 font-medium">
+                  Best prices guaranteed for large quantities
+                </p>
+              </div>
+              <button
+                onClick={handleContactUs}
+                className="flex-shrink-0 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors text-sm"
+              >
+                Get Quote
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Modal */}
+        <ProductModal
+          product={selectedProduct}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      </section>
+    </>
   );
 };
 
