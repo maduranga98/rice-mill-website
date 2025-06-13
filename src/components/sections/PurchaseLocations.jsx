@@ -360,9 +360,9 @@ const PurchaseLocations = () => {
         <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
           {/* Towns Grid */}
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            {/* <h3 className="text-lg font-semibold text-gray-800 mb-4">
               Click on any location to view on map:
-            </h3>
+            </h3> */}
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
               {purchaseLocations.map((location) => (
                 <button
@@ -413,11 +413,11 @@ const PurchaseLocations = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="tel:+94372212345"
+                href="tel:+94779258293"
                 className="inline-flex items-center justify-center px-4 py-2 bg-white text-green-600 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors"
               >
                 <Phone className="w-4 h-4 mr-2" />
-                (037) 22-12345
+                (077) 92-58293
               </a>
               <a
                 href="#contact"
