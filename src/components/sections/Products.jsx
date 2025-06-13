@@ -9,7 +9,7 @@ const products = [
     id: "sudu-kakulu-5kg",
     name: "Sudu Kakulu Rice - 5kg",
     nameMultilingual:
-      "Sudu Kakulu Rice – 5kg | සුදු කකුළු සහල් – 5kg | வெள்ளை ககுলு அرिসি – 5kg",
+      "Sudu Kakulu Rice – 5kg | සුදු කකුළු සහල් – 5kg | வெள்ளை ககுলு அরিசি – 5kg",
     image: "/products/2.webp",
     size: "5kg",
     weight: "5",
@@ -26,7 +26,7 @@ const products = [
     id: "sudu-kakulu-10kg",
     name: "Sudu Kakulu Rice - 10kg",
     nameMultilingual:
-      "Sudu Kakulu Rice – 10kg | සුදු කකුළු සහල් – 10kg | வெள்ளை ககুলু அرिசি – 10kg",
+      "Sudu Kakulu Rice – 10kg | සුදු කකුළු සහල් – 10kg | வெள்ளை קקুলু அரিसി – 10kg",
     image: "/products/5.webp",
     size: "10kg",
     weight: "10",
@@ -42,7 +42,7 @@ const products = [
     id: "sudu-kakulu-25kg",
     name: "Sudu Kakulu Rice - 25kg",
     nameMultilingual:
-      "Sudu Kakulu Rice – 25kg | සුදු කකුළු සහල් – 25kg | வெள்ளை ককুলু अरिसি – 25kg",
+      "Sudu Kakulu Rice – 25kg | සුදු කකුළු සහල් – 25kg | வெள்ளை ককুলு अরिসि – 25kg",
     image: "/products/3.webp",
     size: "25kg",
     weight: "25",
@@ -76,7 +76,7 @@ const products = [
     id: "samba-kakulu-25kg",
     name: "Samba Kakulu Rice - 25kg",
     nameMultilingual:
-      "Samba Kakulu Rice – 25kg | සම්බා කකුළු සහල් – 25kg | சம்பா ககுலு अरिसि – 25kg",
+      "Samba Kakulu Rice – 25kg | සම්බා කකුළු සහල් – 25kg | சம்பா ககুלு अरिসি – 25kg",
     image: "/products/4.webp",
     size: "25kg",
     weight: "25",
@@ -176,7 +176,7 @@ const ProductCard = ({ product, onLearnMore, onContactUs }) => {
   );
 };
 
-// Responsive Product Modal
+// Fixed Responsive Product Modal
 const ProductModal = ({ product, isOpen, onClose }) => {
   if (!isOpen || !product) return null;
 
@@ -196,14 +196,14 @@ const ProductModal = ({ product, isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4"
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto"
       onClick={handleBackdropClick}
     >
-      <div className="bg-white rounded-xl sm:rounded-2xl max-w-xs sm:max-w-lg md:max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] flex flex-col shadow-2xl">
+      <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl my-4 sm:my-8 flex flex-col shadow-2xl max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)]">
         {/* Modal Header - Responsive */}
-        <div className="flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b">
-          <div className="flex-1 pr-3">
-            <h2 className="text-sm sm:text-lg lg:text-xl font-bold text-gray-900 line-clamp-1">
+        <div className="flex items-center justify-between p-4 sm:p-5 lg:p-6 border-b bg-white rounded-t-lg sm:rounded-t-xl lg:rounded-t-2xl flex-shrink-0">
+          <div className="flex-1 pr-3 min-w-0">
+            <h2 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 truncate">
               {product.name}
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 mt-1">
@@ -214,26 +214,26 @@ const ProductModal = ({ product, isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors flex-shrink-0"
+            className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors flex-shrink-0 ml-2"
           >
             <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 
         {/* Modal Content - Responsive Scrolling */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-3 sm:p-4 lg:p-6 space-y-4 sm:space-y-6">
+        <div className="flex-1 overflow-y-auto min-h-0">
+          <div className="p-4 sm:p-5 lg:p-6 space-y-4 sm:space-y-5 lg:space-y-6">
             {/* Product Image and Basic Info - Responsive Layout */}
-            <div className="flex flex-col gap-4 sm:gap-6">
+            <div className="flex flex-col space-y-4 sm:space-y-5">
               {/* Image */}
-              <div className="w-full">
-                <div className="relative aspect-square bg-white rounded-lg sm:rounded-xl overflow-hidden border border-gray-200 max-w-xs mx-auto sm:max-w-none">
+              <div className="w-full flex justify-center">
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-white rounded-lg border border-gray-200 overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.nameMultilingual}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-green-600 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-lg text-xs sm:text-sm font-bold">
+                  <div className="absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded-md text-xs font-bold">
                     {product.size}
                   </div>
                 </div>
@@ -241,33 +241,33 @@ const ProductModal = ({ product, isOpen, onClose }) => {
 
               {/* Info Section */}
               <div className="space-y-3 sm:space-y-4">
-                <div className="space-y-2 sm:space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="flex items-center gap-2">
-                    <Award className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-                    <span className="font-semibold text-gray-900 text-xs sm:text-sm">
+                    <Award className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span className="font-semibold text-gray-900 text-sm">
                       Premium Quality
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Package className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-                    <span className="text-gray-700 text-xs sm:text-sm">
-                      Available Size: {product.size}
+                    <Package className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span className="text-gray-700 text-sm">
+                      Size: {product.size}
                     </span>
                   </div>
                 </div>
 
                 <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200">
-                  <h4 className="font-semibold text-green-800 mb-2 text-xs sm:text-sm">
+                  <h4 className="font-semibold text-green-800 mb-2 text-sm">
                     Key Benefits:
                   </h4>
-                  <div className="space-y-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
                     {product.labels.map((label, index) => (
                       <div
                         key={index}
-                        className="flex items-center gap-2 text-xs sm:text-sm text-green-700"
+                        className="flex items-center gap-2 text-sm text-green-700"
                       >
                         <div className="w-1.5 h-1.5 bg-green-600 rounded-full flex-shrink-0"></div>
-                        {label}
+                        <span className="truncate">{label}</span>
                       </div>
                     ))}
                   </div>
@@ -275,22 +275,34 @@ const ProductModal = ({ product, isOpen, onClose }) => {
               </div>
             </div>
 
+            {/* Multilingual Names */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-900 text-sm">
+                Product Names:
+              </h3>
+              <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <p className="text-xs leading-relaxed text-gray-700 break-words">
+                  {product.nameMultilingual}
+                </p>
+              </div>
+            </div>
+
             {/* Detailed Description */}
             <div className="space-y-2">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+              <h3 className="font-semibold text-gray-900 text-sm">
                 Product Details:
               </h3>
-              <p className="text-gray-700 leading-relaxed text-xs sm:text-sm">
+              <p className="text-sm text-gray-700 leading-relaxed">
                 {product.detailedDescription}
               </p>
             </div>
 
             {/* Quality Highlight */}
             <div className="bg-amber-50 rounded-lg p-3 sm:p-4 border border-amber-200">
-              <h4 className="font-semibold text-amber-800 mb-2 text-xs sm:text-sm">
+              <h4 className="font-semibold text-amber-800 mb-2 text-sm">
                 Why Choose This Product:
               </h4>
-              <p className="text-amber-700 italic text-xs sm:text-sm">
+              <p className="text-amber-700 italic text-sm leading-relaxed">
                 "{product.tagline}"
               </p>
             </div>
@@ -298,18 +310,18 @@ const ProductModal = ({ product, isOpen, onClose }) => {
         </div>
 
         {/* Modal Footer - Responsive */}
-        <div className="p-3 sm:p-4 lg:p-6 border-t bg-gray-50 rounded-b-xl sm:rounded-b-2xl">
-          <div className="flex flex-col gap-2 sm:gap-3">
+        <div className="p-4 sm:p-5 lg:p-6 border-t bg-gray-50 rounded-b-lg sm:rounded-b-xl lg:rounded-b-2xl flex-shrink-0">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <button
               onClick={scrollToContact}
-              className="w-full bg-green-600 text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center text-xs sm:text-sm"
+              className="flex-1 bg-green-600 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center text-sm"
             >
-              <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              Contact for Pricing & Orders
+              <Phone className="w-4 h-4 mr-2" />
+              Contact for Orders
             </button>
             <button
               onClick={onClose}
-              className="w-full px-4 sm:px-6 py-2 sm:py-3 text-gray-600 hover:text-gray-800 transition-colors font-medium text-xs sm:text-sm"
+              className="sm:w-auto px-4 py-2.5 text-gray-600 hover:text-gray-800 transition-colors font-medium text-sm"
             >
               Close
             </button>
