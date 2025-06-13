@@ -19,7 +19,7 @@ const pageStructuredData = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
   name: "Sajith Rice Mill - Premium Sri Lankan Rice | සුදු කැකුළු & සම්බා කැකුළු",
   description:
-    "J.A. Santha Nimal's premium Sri Lankan rice mill offering සුදු කැකුළු, සම්බා කැකුළු, රතු කැකුළු at best prices since 2009. Chemical-free traditional කැකුළු. Island-wide delivery.",
+    "J.A. Santha Nimal&apos;s premium Sri Lankan rice mill offering සුදු කැකුළු, සම්බා කැකුළු, රතු කැකුළු at best prices since 2009. Chemical-free traditional කැකුළු. Island-wide delivery.",
   keywords:
     "Sri Lankan rice, සුදු කැකුළු, සම්බා කැකුළු, රතු කැකුළු, best price rice, Sajith Rice Mill, J.A. Santha Nimal, premium rice Sri Lanka",
   inLanguage: ["en", "si", "ta"],
@@ -130,7 +130,7 @@ const faqStructuredData = {
       name: "Is your rice organic and chemical-free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Absolutely! All our කැකුළු varieties are grown using traditional organic methods without chemical preservatives. We've maintained these standards since our establishment in 2009.",
+        text: "Absolutely! All our කැකුළු varieties are grown using traditional organic methods without chemical preservatives. We&apos;ve maintained these standards since our establishment in 2009.",
       },
     },
     {
@@ -239,11 +239,11 @@ export default function Home() {
       <div className="sr-only">
         <h1>Sajith Rice Mill - Premium Sri Lankan Rice Supplier</h1>
         <p>
-          J.A. Santha Nimal's premium Sri Lankan rice mill established in 2009.
-          We offer the finest සුදු කැකුළු (Sudu Kakulu), සම්බා කැකුළු (Samba
-          Kakulu), and රතු කැකුළු (Ratu Kakulu) rice varieties at best prices.
-          Chemical-free traditional කැකුළු processed using organic methods. Bulk
-          orders and island-wide delivery across Sri Lanka.
+          J.A. Santha Nimal&apos;s premium Sri Lankan rice mill established in
+          2009. We offer the finest සුදු කැකුළු (Sudu Kakulu), සම්බා කැකුළු
+          (Samba Kakulu), and රතු කැකුළු (Ratu Kakulu) rice varieties at best
+          prices. Chemical-free traditional කැකුළු processed using organic
+          methods. Bulk orders and island-wide delivery across Sri Lanka.
         </p>
         <p>
           Premium rice supplier serving Colombo, Giriulla, Negombo, Kelaniya,
@@ -286,7 +286,7 @@ export default function Home() {
         >
           <div className="sr-only">
             <h2 id="story-heading">
-              Our Story - J.A. Santha Nimal's Rice Mill Heritage Since 2009
+              Our Story - J.A. Santha Nimal&apos;s Rice Mill Heritage Since 2009
             </h2>
             <p>
               Established by J.A. Santha Nimal in December 2009 in Nadalagamuwa,
