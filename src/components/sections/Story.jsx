@@ -14,12 +14,12 @@ const Story = () => {
       description:
         "Learn about Sajith Rice Mill's journey since 2009, specializing in premium Sri Lankan rice varieties with traditional organic farming methods",
       url: `${
-        process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
       }/#story`,
       mainEntity: {
         "@type": "Organization",
         "@id": `${
-          process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+          process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
         }/#organization`,
         name: "Sajith Rice Mill",
         foundingDate: "2009-12",
@@ -98,17 +98,17 @@ const Story = () => {
       </div>
 
       <section
-        className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-amber-50 to-green-50"
+        className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-amber-50 to-green-50"
         role="region"
         aria-labelledby="story-heading"
         itemScope
         itemType="https://schema.org/AboutPage"
       >
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-16">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Image Section */}
-            <div className="w-full lg:w-1/2 relative order-2 lg:order-1">
-              <div className="relative overflow-hidden rounded-xl sm:rounded-2xl aspect-[4/3] shadow-lg sm:shadow-2xl">
+            <div className="relative order-2 lg:order-1">
+              <div className="relative overflow-hidden rounded-2xl aspect-[4/3] shadow-2xl">
                 <Image
                   src="/image.webp"
                   alt="Sajith Rice Mill traditional rice farming facility in Nadalagamuwa, Wadumunnegadara - premium Sri Lankan rice production since 2009"
@@ -122,13 +122,11 @@ const Story = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
 
-              {/* Floating Stats Card - Enhanced */}
-              <div className="absolute -bottom-3 -right-3 sm:-bottom-6 sm:-right-6 bg-white rounded-lg sm:rounded-xl shadow-lg sm:shadow-xl p-3 sm:p-6 border border-green-100">
+              {/* Floating Stats Card */}
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 border border-green-100">
                 <div className="text-center">
-                  <div className="text-xl sm:text-2xl font-bold text-green-700">
-                    15+
-                  </div>
-                  <div className="text-xs sm:text-sm text-gray-600 whitespace-nowrap">
+                  <div className="text-2xl font-bold text-green-700">15+</div>
+                  <div className="text-sm text-gray-600 whitespace-nowrap">
                     Years of Excellence
                   </div>
                   <div className="text-xs text-amber-600 font-medium mt-1">
@@ -139,125 +137,71 @@ const Story = () => {
             </div>
 
             {/* Content Section */}
-            <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8 order-1 lg:order-2">
-              <div className="text-center lg:text-left">
-                {/* Badge */}
-                <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-                  Est. 2009 • Traditional Sri Lankan Rice
-                </div>
+            <div className="space-y-8 order-1 lg:order-2">
+              {/* Section Badge */}
+              <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                Est. 2009 • Traditional Sri Lankan Rice
+              </div>
 
-                {/* Main Heading */}
+              {/* Main Heading - Consistent Typography */}
+              <div>
                 <h2
                   id="story-heading"
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-green-900 leading-tight"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-900 leading-tight mb-4"
                   itemProp="name"
                 >
                   Our Story of
                   <span className="text-amber-600 block">Excellence</span>
                 </h2>
 
-                {/* Story Content */}
-                <div
-                  className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8 leading-relaxed space-y-4"
-                  itemProp="description"
-                >
-                  <p>
-                    Founded by{" "}
-                    <span className="font-semibold text-green-800">
-                      J.A. Santha Nimal
-                    </span>{" "}
-                    in December 2009, our journey began in the heart of
-                    Nadalagamuwa Wadumunnegadara with a simple vision: to
-                    preserve and produce the finest quality traditional Sri
-                    Lankan rice varieties following authentic organic methods.
-                  </p>
-
-                  <p className="text-sm sm:text-base text-gray-600">
-                    For over 15 years, we have specialized in premium white rice
-                    varieties, maintaining chemical-free production standards
-                    and sustainable farming practices that honor our
-                    agricultural heritage.
-                  </p>
-                </div>
+                {/* Subtitle */}
+                <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+                  Preserving traditional Sri Lankan rice heritage through
+                  authentic organic methods
+                </p>
               </div>
 
-              {/* Key Features - Enhanced */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-md sm:shadow-lg border border-green-50 hover:shadow-lg sm:hover:shadow-xl transition-shadow">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-                    <svg
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-green-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+              {/* Story Content - Consistent Typography */}
+              <div className="space-y-6" itemProp="description">
+                <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                  Founded by{" "}
+                  <span className="font-semibold text-green-800">
+                    J.A. Santha Nimal
+                  </span>{" "}
+                  in December 2009, our journey began in the heart of
+                  Nadalagamuwa Wadumunnegadara with a simple vision: to preserve
+                  and produce the finest quality traditional Sri Lankan rice
+                  varieties following authentic organic methods.
+                </p>
+
+                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                  For over 15 years, we have specialized in premium white rice
+                  varieties, maintaining chemical-free production standards and
+                  sustainable farming practices that honor our agricultural
+                  heritage.
+                </p>
+              </div>
+
+              {/* Key Features Grid */}
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="bg-white rounded-xl p-6 shadow-md border border-green-50 hover:shadow-lg transition-shadow">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     Chemical-Free Production
                   </h3>
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                     No chemical preservatives or artificial additives, ensuring
                     healthy and natural nutrition in every grain of rice.
                   </p>
                 </div>
 
-                <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-md sm:shadow-lg border border-green-50 hover:shadow-lg sm:hover:shadow-xl transition-shadow">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-                    <svg
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+                <div className="bg-white rounded-xl p-6 shadow-md border border-green-50 hover:shadow-lg transition-shadow">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     Traditional Heritage
                   </h3>
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                     Authentic Sri Lankan rice varieties processed using
                     ancestral organic methods passed down through generations.
                   </p>
-                </div>
-              </div>
-
-              {/* Additional Story Details */}
-              <div className="bg-green-50 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-green-100">
-                <h3 className="font-semibold text-green-800 mb-3 text-sm sm:text-base">
-                  Our Commitment to Quality
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-green-700">
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full flex-shrink-0"></div>
-                    <span>15+ Years Experience</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full flex-shrink-0"></div>
-                    <span>Organic Farming Methods</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full flex-shrink-0"></div>
-                    <span>Premium Rice Varieties</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full flex-shrink-0"></div>
-                    <span>Sustainable Practices</span>
-                  </div>
                 </div>
               </div>
             </div>

@@ -6,15 +6,6 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import LeafletMap from "../ui/LeafletMap";
 import { companyInfo } from "@/lib/data";
-import {
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  CheckCircle,
-  AlertCircle,
-  Clock,
-} from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -36,12 +27,12 @@ const Contact = () => {
       description:
         "Contact Sajith Rice Mill for premium rice orders, bulk purchases, wholesale inquiries. Phone: (077) 92-58293, Email: sajithricemill@gmail.com",
       url: `${
-        process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
       }/#contact`,
       mainEntity: {
         "@type": "LocalBusiness",
         "@id": `${
-          process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+          process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
         }/#organization`,
         name: "Sajith Rice Mill",
         description:
@@ -82,7 +73,7 @@ const Contact = () => {
         paymentAccepted: ["Cash", "Bank Transfer", "Mobile Payment"],
         priceRange: "$$",
         keywords:
-          "rice supplier contact, bulk rice orders, wholesale rice, සම්බා කකුළු ඇණවුම්, සුදු කකුළු ඇණවුම්",
+          "rice supplier contact, bulk rice orders, wholesale rice, සම්බා කැකුළු ඇණවුම්, සුදු කැකුළු ඇණවුම්",
       },
     };
 
@@ -184,7 +175,7 @@ const Contact = () => {
       </div>
 
       <section
-        className="py-16 bg-amber-50"
+        className="py-16 md:py-20 lg:py-24 bg-amber-50"
         role="region"
         aria-labelledby="contact-heading"
         itemScope
@@ -192,73 +183,69 @@ const Contact = () => {
       >
         <div className="container mx-auto px-4">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h2
-              id="contact-heading"
-              className="text-3xl md:text-4xl font-bold mb-6 text-green-900"
-              itemProp="name"
-            >
-              Contact Us
-            </h2>
-            <p
-              className="text-base text-gray-600 max-w-2xl mx-auto"
-              itemProp="description"
-            >
-              Reach out to us for rice orders, bulk purchases, and wholesale
-              inquiries
-            </p>
+          <div className="text-center mb-12 lg:mb-16">
+            {/* Main Heading - Consistent Typography */}
+            <div className="mb-8">
+              <h2
+                id="contact-heading"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-900 leading-tight mb-4"
+                itemProp="name"
+              >
+                Contact Us
+              </h2>
+
+              {/* Subtitle */}
+              <p
+                className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                itemProp="description"
+              >
+                Reach out to us for rice orders, bulk purchases, and wholesale
+                inquiries
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 lg:mb-16">
             {/* Contact Form */}
             <div className="order-2 lg:order-1">
-              <h3 className="text-2xl font-bold mb-6 text-green-900">
+              <h3 className="text-lg font-semibold mb-6 text-green-900">
                 Send a Message
               </h3>
 
               {/* Configuration Warning */}
               {!isEmailJSReady && (
-                <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg flex items-start gap-3 text-yellow-700">
-                  <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-medium text-sm">
-                      EmailJS Not Configured
-                    </div>
-                    <div className="text-xs mt-1">
-                      Please set up your EmailJS environment variables.
-                    </div>
+                <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-700">
+                  <div className="font-medium text-sm mb-1">
+                    EmailJS Not Configured
+                  </div>
+                  <div className="text-xs">
+                    Please set up your EmailJS environment variables.
                   </div>
                 </div>
               )}
 
               {/* Success Message */}
               {submitStatus === "success" && (
-                <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 text-green-700">
-                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-medium text-sm">
-                      Message Sent Successfully! 📧
-                    </div>
-                    <div className="text-xs mt-1">
-                      We've received your rice inquiry and will get back to you
-                      within 24 hours.
-                    </div>
+                <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
+                  <div className="font-medium text-sm mb-1">
+                    Message Sent Successfully! 📧
+                  </div>
+                  <div className="text-xs">
+                    We've received your rice inquiry and will get back to you
+                    within 24 hours.
                   </div>
                 </div>
               )}
 
               {/* Error Message */}
               {submitStatus === "error" && (
-                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 text-red-700">
-                  <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-medium text-sm">
-                      Failed to Send Message
-                    </div>
-                    <div className="text-xs mt-1">
-                      Please try again or contact us directly via phone: (077)
-                      92-58293
-                    </div>
+                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+                  <div className="font-medium text-sm mb-1">
+                    Failed to Send Message
+                  </div>
+                  <div className="text-xs">
+                    Please try again or contact us directly via phone: (077)
+                    92-58293
                   </div>
                 </div>
               )}
@@ -322,20 +309,17 @@ const Contact = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full flex items-center justify-center gap-2"
+                  className="w-full"
                   disabled={isSubmitting || !isEmailJSReady}
                   aria-label="Send rice order inquiry"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
                       Sending...
                     </>
                   ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Send Message
-                    </>
+                    "Send Message"
                   )}
                 </Button>
               </form>
@@ -346,11 +330,10 @@ const Contact = () => {
                 itemScope
                 itemType="https://schema.org/OpeningHoursSpecification"
               >
-                <h5 className="font-semibold text-green-800 mb-3 flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
+                <h5 className="text-lg font-semibold text-green-800 mb-3">
                   Business Hours
                 </h5>
-                <div className="space-y-2 text-sm text-green-700">
+                <div className="space-y-2 text-sm md:text-base text-green-700">
                   <div className="flex justify-between">
                     <span>Monday - Friday:</span>
                     <span className="font-medium">8:00 AM - 6:00 PM</span>
@@ -369,7 +352,7 @@ const Contact = () => {
 
             {/* Map and Contact Info */}
             <div className="order-1 lg:order-2">
-              <h3 className="text-2xl font-bold mb-6 text-green-900">
+              <h3 className="text-lg font-semibold mb-6 text-green-900">
                 Find Us
               </h3>
 
@@ -388,63 +371,53 @@ const Contact = () => {
               <div className="space-y-4">
                 <a
                   href={`mailto:${companyInfo.email}`}
-                  className="flex items-center gap-4 p-4 bg-white rounded-lg border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all group"
+                  className="block p-4 bg-white rounded-lg border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all"
                   itemScope
                   itemType="https://schema.org/ContactPoint"
                   aria-label="Send email for rice orders"
                 >
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-amber-200 transition-colors">
-                    <Mail className="w-6 h-6 text-amber-600" />
+                  <div className="font-semibold text-gray-900 mb-1">
+                    Email Orders
                   </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">
-                      Email Orders
-                    </div>
-                    <div className="text-amber-700 text-sm" itemProp="email">
-                      {companyInfo.email}
-                    </div>
+                  <div
+                    className="text-amber-700 text-sm md:text-base"
+                    itemProp="email"
+                  >
+                    {companyInfo.email}
                   </div>
                 </a>
 
                 <a
                   href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
-                  className="flex items-center gap-4 p-4 bg-white rounded-lg border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all group"
+                  className="block p-4 bg-white rounded-lg border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all"
                   itemScope
                   itemType="https://schema.org/ContactPoint"
                   aria-label="Call for immediate rice orders"
                 >
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-amber-200 transition-colors">
-                    <Phone className="w-6 h-6 text-amber-600" />
+                  <div className="font-semibold text-gray-900 mb-1">
+                    Call for Orders
                   </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">
-                      Call for Orders
-                    </div>
-                    <div
-                      className="text-amber-700 text-sm"
-                      itemProp="telephone"
-                    >
-                      {companyInfo.phone}
-                    </div>
+                  <div
+                    className="text-amber-700 text-sm md:text-base"
+                    itemProp="telephone"
+                  >
+                    {companyInfo.phone}
                   </div>
                 </a>
 
                 <div
-                  className="flex items-start gap-4 p-4 bg-white rounded-lg border border-gray-200"
+                  className="p-4 bg-white rounded-lg border border-gray-200"
                   itemScope
                   itemType="https://schema.org/PostalAddress"
                 >
-                  <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <MapPin className="w-6 h-6 text-amber-600" />
+                  <div className="font-semibold text-gray-900 mb-1">
+                    Location
                   </div>
-                  <div>
-                    <div className="font-semibold text-gray-900">Location</div>
-                    <div
-                      className="text-gray-700 text-sm leading-relaxed"
-                      itemProp="address"
-                    >
-                      {companyInfo.address}
-                    </div>
+                  <div
+                    className="text-gray-700 text-sm md:text-base leading-relaxed"
+                    itemProp="address"
+                  >
+                    {companyInfo.address}
                   </div>
                 </div>
               </div>
@@ -454,28 +427,26 @@ const Contact = () => {
           {/* Bottom CTA */}
           <div className="text-center">
             <div className="bg-gradient-to-r from-green-600 to-amber-600 rounded-xl p-8 text-white shadow-xl">
-              <h3 className="text-2xl font-bold mb-4">
+              <h3 className="text-xl font-semibold mb-4">
                 Ready to Order Premium Rice?
               </h3>
-              <p className="text-green-100 mb-6 text-lg max-w-2xl mx-auto">
+              <p className="text-green-100 mb-6 text-sm md:text-base max-w-2xl mx-auto">
                 Get in touch with us today for bulk rice orders, wholesale
                 pricing, and fast delivery across Sri Lanka
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
                 <a
                   href={`mailto:${companyInfo.email}?subject=Rice Order Inquiry&body=Hello, I would like to inquire about rice orders. Please provide pricing and availability for:`}
-                  className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white text-green-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl"
+                  className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white text-green-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl text-sm md:text-base"
                   aria-label="Send email inquiry for rice orders"
                 >
-                  <Mail className="w-5 h-5 mr-2" />
                   Email Order
                 </a>
                 <a
                   href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
-                  className="flex-1 inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors"
+                  className="flex-1 inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors text-sm md:text-base"
                   aria-label="Call now for immediate rice orders"
                 >
-                  <Phone className="w-5 h-5 mr-2" />
                   Call Now
                 </a>
               </div>

@@ -69,7 +69,7 @@ export const metadata = {
     telephone: false,
   },
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
   ),
   alternates: {
     canonical: "/",
@@ -82,7 +82,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
     title:
       "Sajith Rice Mill - Premium Sri Lankan Rice | සුදු කැකුළු & සම්බා කැකුළු",
     description:
@@ -169,11 +169,11 @@ const structuredData = {
     "Santha Nimal Rice Mill",
     "සජිත් සහල් මෝල",
   ],
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
   logo: {
     "@type": "ImageObject",
     url: `${
-      process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
     }/logo-512x512.png`,
     width: 512,
     height: 512,
@@ -329,12 +329,12 @@ const localBusinessData = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": `${
-    process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
   }/#business`,
   name: "Sajith Rice Mill",
   alternateName: "සජිත් සහල් මෝල",
   image: `${
-    process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
   }/logo-512x512.png`,
   telephone: "+94-77-925-8293",
   email: "sajithricemill@gmail.com",
@@ -351,7 +351,7 @@ const localBusinessData = {
     latitude: 7.398382,
     longitude: 80.006091,
   },
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
   openingHours: ["Mo-Fr 08:00-18:00", "Sa 08:00-16:00"],
   priceRange: "$$",
   servesCuisine: "Sri Lankan",
@@ -375,14 +375,15 @@ const breadcrumbData = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com",
+      item:
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Products",
       item: `${
-        process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
       }/#products`,
     },
     {
@@ -390,7 +391,7 @@ const breadcrumbData = {
       position: 3,
       name: "Contact",
       item: `${
-        process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
       }/#contact`,
     },
   ],

@@ -60,7 +60,7 @@ const Banner = () => {
       image: heroSlides.map((slide, index) => ({
         "@type": "ImageObject",
         url: `${
-          process.env.NEXT_PUBLIC_SITE_URL || "https://sajithricemill.com"
+          process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
         }${slide.image}`,
         name: slide.title.replace(/\n/g, " "),
         description: slide.subtitle,

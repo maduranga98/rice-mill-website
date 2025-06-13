@@ -144,50 +144,73 @@ const WhyChooseUs = () => {
 
   return (
     <>
-      {/* SEO Meta Tags for this section */}
+      {/* Hidden SEO content with Sinhala keywords */}
+      <div className="sr-only">
+        <h2>Why Choose Sajith Rice Mill - සජිත් සහල් මෝල තෝරා ගන්නේ ඇයි</h2>
+        <p>
+          Premium Sri Lankan rice qualities: Traditional heritage (සම්ප්‍රදායික
+          උරුමය), Chemical-free purity (රසායනික නොමැති පිරිසුදුභාවය), 15+ years
+          experience (15+ වර්ෂ අත්දැකීම්), Superior nutrition (ඉහළ පෝෂණය),
+          Consistent supply (නිරන්තර සැපයුම), Trusted quality (විශ්වාසදායක
+          තත්ත්වය).
+        </p>
+        <p>
+          Quality features: Organic farming methods (ඔර්ගනික් ගොවිතැන් ක්‍රම),
+          Heritage rice varieties (උරුම සහල් වර්ග), Natural preservatives
+          (ස්වභාවික කල් තබා ගන්නා ද්‍රව්‍ය), Healthy rice (සෞඛ්‍ය සම්පන්න සහල්),
+          Quality assurance (තත්ත්ව සහතිකය), Reliable supplier (විශ්වාසදායක
+          සැපයුම්කරු).
+        </p>
+      </div>
+
       <section
-        className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-green-50 via-white to-amber-50"
+        className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-green-50 via-white to-amber-50"
         aria-labelledby="why-choose-us-heading"
         itemScope
         itemType="https://schema.org/AboutPage"
       >
         <div className="container mx-auto px-4">
-          {/* Header - SEO Optimized */}
-          <header className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+          {/* Header */}
+          <div className="text-center mb-12 lg:mb-16">
+            {/* Section Badge */}
+            <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-6">
               <span itemProp="keywords">Quality • Heritage • Trust</span>
             </div>
 
-            <h2
-              id="why-choose-us-heading"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-green-900 leading-tight"
-              itemProp="headline"
-            >
-              Why Choose Our Premium
-              <span className="text-amber-600 block">Sudu Kakulu Rice?</span>
-            </h2>
+            {/* Main Heading - Consistent Typography */}
+            <div className="mb-8">
+              <h2
+                id="why-choose-us-heading"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-900 leading-tight mb-4"
+                itemProp="headline"
+              >
+                Why Choose Our Premium
+                <span className="text-amber-600 block">Sudu Kakulu Rice?</span>
+              </h2>
 
-            <p
-              className="text-sm sm:text-base lg:text-xl text-gray-600 max-w-lg sm:max-w-xl lg:max-w-3xl mx-auto leading-relaxed"
-              itemProp="description"
-            >
-              Experience the difference of authentic Sri Lankan traditional
-              white rice that combines
-              <strong> heritage, health, and exceptional quality</strong> -
-              direct from our family farm since 2009.
-            </p>
-          </header>
+              {/* Subtitle */}
+              <p
+                className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                itemProp="description"
+              >
+                Experience the difference of authentic Sri Lankan traditional
+                white rice that combines{" "}
+                <strong>heritage, health, and exceptional quality</strong> -
+                direct from our family farm since 2009.
+              </p>
+            </div>
+          </div>
 
-          {/* Features Grid - SEO Enhanced */}
+          {/* Features Grid */}
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 lg:mb-16"
             role="list"
             aria-label="Rice quality features and benefits"
           >
             {features.map((feature, index) => (
               <article
                 key={feature.id}
-                className="group bg-white p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg hover:shadow-xl lg:hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-200 hover:-translate-y-1 lg:hover:-translate-y-2"
+                className="group bg-white p-6 lg:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200"
                 role="listitem"
                 itemScope
                 itemType="https://schema.org/Service"
@@ -196,14 +219,14 @@ const WhyChooseUs = () => {
                 {/* Content with semantic markup */}
                 <h3
                   id={`feature-${feature.id}-title`}
-                  className="text-base sm:text-lg lg:text-xl font-bold mb-2 sm:mb-3 lg:mb-4 text-gray-900 group-hover:text-green-800 transition-colors"
+                  className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-green-800 transition-colors"
                   itemProp="name"
                 >
                   {feature.title}
                 </h3>
 
                 <p
-                  className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed mb-2"
+                  className="text-sm md:text-base text-gray-600 leading-relaxed"
                   itemProp="description"
                 >
                   {feature.description}
@@ -221,28 +244,22 @@ const WhyChooseUs = () => {
                 >
                   <span itemProp="description">{feature.benefit}</span>
                 </div>
-
-                {/* Hover Indicator - Enhanced for accessibility */}
-                <div
-                  className="w-0 group-hover:w-8 h-1 bg-gradient-to-r from-green-500 to-amber-500 rounded-full mt-4 transition-all duration-300"
-                  aria-hidden="true"
-                ></div>
               </article>
             ))}
           </div>
 
-          {/* Enhanced CTA Section */}
-          <footer className="text-center" role="contentinfo">
+          {/* CTA Section */}
+          <div className="text-center" role="contentinfo">
             <div
-              className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-md border border-gray-100"
+              className="inline-flex flex-col sm:flex-row items-center gap-4 bg-white rounded-xl p-6 shadow-md border border-gray-100"
               itemScope
               itemType="https://schema.org/ContactPoint"
             >
               <div className="text-center sm:text-left">
-                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Ready to Experience Premium Quality Rice?
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-600">
+                <p className="text-sm md:text-base text-gray-600">
                   Contact us today for <strong>bulk orders</strong>,{" "}
                   <strong>wholesale inquiries</strong>, and{" "}
                   <strong>custom packaging</strong>
@@ -258,14 +275,14 @@ const WhyChooseUs = () => {
                     contactSection.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="flex-shrink-0 bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-colors text-xs sm:text-sm touch-manipulation focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                className="flex-shrink-0 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors text-sm md:text-base touch-manipulation focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 aria-label="Contact us for premium rice orders and inquiries"
                 type="button"
               >
                 Get Premium Rice Quote
               </button>
             </div>
-          </footer>
+          </div>
         </div>
 
         {/* Additional structured data for local business */}
