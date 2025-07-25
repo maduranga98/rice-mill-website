@@ -256,33 +256,95 @@ const PurchaseLocations = () => {
         document.head.appendChild(link);
       }
 
-      // Add custom CSS to fix z-index issues
+      // Add custom CSS to fix z-index issues and control zoom buttons
       if (!document.getElementById("leaflet-fix-css")) {
         const style = document.createElement("style");
         style.id = "leaflet-fix-css";
         style.textContent = `
-          .leaflet-map-pane { z-index: 2 !important; }
-          .leaflet-tile-pane { z-index: 1 !important; }
-          .leaflet-overlay-pane { z-index: 4 !important; }
-          .leaflet-marker-pane { z-index: 6 !important; }
-          .leaflet-popup-pane { z-index: 7 !important; }
-          .leaflet-marker-icon { z-index: 1000 !important; }
+          /* Fix z-index hierarchy to prevent overlap with navbar */
+          .leaflet-container {
+            z-index: 1 !important;
+            border-radius: 16px;
+          }
           
+          /* Zoom controls - ensure they stay below navbar */
+          .leaflet-control-zoom {
+            z-index: 10 !important;
+          }
+          
+          .leaflet-control-zoom a {
+            z-index: 10 !important;
+          }
+          
+          /* Map layers z-index */
+          .leaflet-map-pane { 
+            z-index: 2 !important; 
+          }
+          
+          .leaflet-tile-pane { 
+            z-index: 1 !important; 
+          }
+          
+          .leaflet-overlay-pane { 
+            z-index: 4 !important; 
+          }
+          
+          .leaflet-marker-pane { 
+            z-index: 6 !important; 
+          }
+          
+          .leaflet-popup-pane { 
+            z-index: 7 !important; 
+          }
+          
+          .leaflet-marker-icon { 
+            z-index: 1000 !important; 
+          }
+          
+          /* Custom marker styles */
           .custom-marker {
-            width: 20px; height: 20px; background-color: #f59e0b; border-radius: 50%;
-            border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            position: relative; z-index: 1000 !important;
+            width: 20px; 
+            height: 20px; 
+            background-color: #f59e0b; 
+            border-radius: 50%;
+            border: 2px solid white; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            position: relative; 
+            z-index: 1000 !important;
           }
           
           .custom-marker::after {
-            content: ''; position: absolute; top: 50%; left: 50%; width: 6px; height: 6px;
-            background-color: white; border-radius: 50%; transform: translate(-50%, -50%);
+            content: ''; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            width: 6px; 
+            height: 6px;
+            background-color: white; 
+            border-radius: 50%; 
+            transform: translate(-50%, -50%);
           }
           
-          .custom-div-icon { background: transparent !important; border: none !important; }
-          .custom-popup .leaflet-popup-content-wrapper { border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); border: 1px solid #e5e7eb; }
-          .custom-popup .leaflet-popup-tip { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); }
-          .leaflet-container { border-radius: 16px; }
+          .custom-div-icon { 
+            background: transparent !important; 
+            border: none !important; 
+          }
+          
+          /* Popup styles */
+          .custom-popup .leaflet-popup-content-wrapper { 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
+            border: 1px solid #e5e7eb; 
+          }
+          
+          .custom-popup .leaflet-popup-tip { 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
+          }
+          
+          /* Ensure attribution control doesn't interfere */
+          .leaflet-control-attribution {
+            z-index: 5 !important;
+          }
         `;
         document.head.appendChild(style);
       }
@@ -480,7 +542,7 @@ const PurchaseLocations = () => {
       </div>
 
       <section
-        className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-green-50 via-white to-amber-50"
+        className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-green-50 via-white to-amber-50 mt-16"
         role="region"
         aria-labelledby="locations-heading"
         itemScope
@@ -541,11 +603,11 @@ const PurchaseLocations = () => {
               </div>
             </div>
 
-            {/* Map */}
-            <div className="relative rounded-lg overflow-hidden border border-gray-200">
+            {/* Map Container with proper z-index isolation */}
+            <div className="relative rounded-lg overflow-hidden border border-gray-200 isolate">
               <div
                 ref={mapRef}
-                className="w-full h-[400px]"
+                className="w-full h-[400px] relative z-0"
                 role="application"
                 aria-label="Interactive map showing Sajith Rice Mill service areas across Sri Lanka"
                 itemProp="serviceArea"
@@ -553,7 +615,7 @@ const PurchaseLocations = () => {
 
               {/* Loading Indicator */}
               {!isMapLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-50">
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-20">
                   <div className="text-center">
                     <div className="inline-block w-6 h-6 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-2"></div>
                     <p className="text-gray-600 text-sm">
@@ -563,6 +625,21 @@ const PurchaseLocations = () => {
                 </div>
               )}
             </div>
+
+            {/* Selected Location Info */}
+            {selectedLocation && (
+              <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                <h4 className="font-semibold text-amber-800 mb-2">
+                  Selected Location: {selectedLocation.name} -{" "}
+                  {selectedLocation.sinhalaName}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm text-amber-700">
+                  <div>District: {selectedLocation.district}</div>
+                  <div>Province: {selectedLocation.province}</div>
+                  <div>Rice Delivery: Available</div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Service Information */}
