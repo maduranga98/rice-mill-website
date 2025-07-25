@@ -121,6 +121,8 @@ export const companyInfo = {
   name: "Sajith Rice Mill.",
   email: "sajithricemill@gmail.com",
   phone: "(077) 92-58293",
+  phone1: "(071) 62-58293",
+  phone2: "(037) 22-80835",
   address: "Sajith Rice Mill,Nadalagamuwa,Wadumunnegedara,Sri Lanka",
   social: {
     facebook: "https://facebook.com/ricemill",

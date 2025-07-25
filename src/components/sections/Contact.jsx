@@ -4,8 +4,234 @@ import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-import LeafletMap from "../ui/LeafletMap";
 import { companyInfo } from "@/lib/data";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Clock,
+} from "lucide-react";
+
+// Fixed LeafletMap component with proper z-index handling
+const FixedLeafletMap = ({
+  lat = 7.398382,
+  lng = 80.006091,
+  zoom = 15,
+  height = "320px",
+  mapType = "satellite",
+}) => {
+  const mapRef = React.useRef(null);
+  const mapInstanceRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Load Leaflet CSS
+      if (!document.getElementById("leaflet-css")) {
+        const link = document.createElement("link");
+        link.id = "leaflet-css";
+        link.rel = "stylesheet";
+        link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+        link.integrity = "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
+        link.crossOrigin = "";
+        document.head.appendChild(link);
+      }
+
+      // Add custom CSS to fix z-index issues
+      if (!document.getElementById("leaflet-contact-fix-css")) {
+        const style = document.createElement("style");
+        style.id = "leaflet-contact-fix-css";
+        style.textContent = `
+          /* Contact page map specific fixes */
+          .contact-leaflet-container {
+            z-index: 1 !important;
+            border-radius: 8px;
+          }
+          
+          .contact-leaflet-container .leaflet-control-zoom {
+            z-index: 10 !important;
+          }
+          
+          .contact-leaflet-container .leaflet-control-zoom a {
+            z-index: 10 !important;
+          }
+          
+          .contact-leaflet-container .leaflet-control-attribution {
+            z-index: 5 !important;
+          }
+          
+          .contact-leaflet-container .leaflet-map-pane { 
+            z-index: 2 !important; 
+          }
+          
+          .contact-leaflet-container .leaflet-tile-pane { 
+            z-index: 1 !important; 
+          }
+          
+          .contact-leaflet-container .leaflet-overlay-pane { 
+            z-index: 4 !important; 
+          }
+          
+          .contact-leaflet-container .leaflet-marker-pane { 
+            z-index: 6 !important; 
+          }
+          
+          .contact-leaflet-container .leaflet-popup-pane { 
+            z-index: 7 !important; 
+          }
+          
+          .contact-leaflet-container .leaflet-marker-icon { 
+            z-index: 1000 !important; 
+          }
+
+          .contact-custom-popup .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          }
+          
+          .contact-custom-popup .leaflet-popup-tip {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      const initMap = async () => {
+        if (!window.L) {
+          const script = document.createElement("script");
+          script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+          script.integrity =
+            "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
+          script.crossOrigin = "";
+          script.async = true;
+
+          await new Promise((resolve, reject) => {
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+        }
+
+        renderMap();
+      };
+
+      const renderMap = () => {
+        const L = window.L;
+
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.remove();
+        }
+
+        const map = L.map(mapRef.current, {
+          center: [lat, lng],
+          zoom: zoom,
+          zoomControl: true,
+          attributionControl: true,
+        });
+
+        mapInstanceRef.current = map;
+
+        let tileLayer;
+        if (mapType === "satellite") {
+          tileLayer = L.tileLayer(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+            {
+              attribution:
+                "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
+            }
+          );
+        } else {
+          tileLayer = L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+              attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }
+          );
+        }
+
+        tileLayer.addTo(map);
+
+        const riceMillIcon = L.divIcon({
+          html: `
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <div style="width: 16px; height: 16px; background-color: #f59e0b; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>
+            </div>
+          `,
+          className: "custom-div-icon",
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+        });
+
+        const marker = L.marker([lat, lng], { icon: riceMillIcon }).addTo(map);
+
+        const popup = L.popup({
+          className: "contact-custom-popup",
+          closeButton: true,
+          autoClose: false,
+          closeOnEscapeKey: false,
+        }).setContent(`
+          <div style="padding: 8px; max-width: 200px;">
+            <h3 style="margin: 0 0 8px; font-weight: bold; color: #1b5e20;">Sajith Rice Mill.</h3>
+            <p style="margin: 0; font-size: 12px; color: #333;">
+              Premium quality rice directly from our fields to your table.
+            </p>
+            <p style="margin: 4px 0 0; font-size: 11px; color: #666;">
+              Coordinates: ${lat}, ${lng}
+            </p>
+          </div>
+        `);
+
+        marker.bindPopup(popup).openPopup();
+
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 100);
+      };
+
+      initMap();
+    }
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [lat, lng, zoom, mapType]);
+
+  return (
+    <div className="relative rounded-lg overflow-hidden shadow-md isolate">
+      <div
+        ref={mapRef}
+        className="contact-leaflet-container w-full relative z-0"
+        style={{ height }}
+        role="application"
+        aria-label="Map showing location of Sajith Rice Mill."
+      ></div>
+
+      {/* Fallback content while map loads */}
+      <div className="absolute inset-0 flex items-center justify-center bg-gray-100 map-loading z-20">
+        <div className="text-center">
+          <div className="inline-block w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-2"></div>
+          <p className="text-gray-600 text-sm">Loading map...</p>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .map-loading {
+          transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .contact-leaflet-container:not(:empty) ~ .map-loading {
+          opacity: 0;
+          visibility: hidden;
+        }
+      `}</style>
+    </div>
+  );
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -175,7 +401,7 @@ const Contact = () => {
       </div>
 
       <section
-        className="py-16 md:py-20 lg:py-24 bg-amber-50"
+        className="py-16 md:py-20 lg:py-24 bg-amber-50 mt-16"
         role="region"
         aria-labelledby="contact-heading"
         itemScope
@@ -208,44 +434,53 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 lg:mb-16">
             {/* Contact Form */}
             <div className="order-2 lg:order-1">
-              <h3 className="text-lg font-semibold mb-6 text-green-900">
+              <h3 className="text-xl font-bold mb-6 text-green-900">
                 Send a Message
               </h3>
 
               {/* Configuration Warning */}
               {!isEmailJSReady && (
-                <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-700">
-                  <div className="font-medium text-sm mb-1">
-                    EmailJS Not Configured
-                  </div>
-                  <div className="text-xs">
-                    Please set up your EmailJS environment variables.
+                <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg flex items-start gap-3 text-yellow-700">
+                  <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-medium text-sm">
+                      EmailJS Not Configured
+                    </div>
+                    <div className="text-xs mt-1">
+                      Please set up your EmailJS environment variables.
+                    </div>
                   </div>
                 </div>
               )}
 
               {/* Success Message */}
               {submitStatus === "success" && (
-                <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
-                  <div className="font-medium text-sm mb-1">
-                    Message Sent Successfully! 📧
-                  </div>
-                  <div className="text-xs">
-                    We've received your rice inquiry and will get back to you
-                    within 24 hours.
+                <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 text-green-700">
+                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-medium text-sm">
+                      Message Sent Successfully! 📧
+                    </div>
+                    <div className="text-xs mt-1">
+                      We've received your rice inquiry and will get back to you
+                      within 24 hours.
+                    </div>
                   </div>
                 </div>
               )}
 
               {/* Error Message */}
               {submitStatus === "error" && (
-                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-                  <div className="font-medium text-sm mb-1">
-                    Failed to Send Message
-                  </div>
-                  <div className="text-xs">
-                    Please try again or contact us directly via phone: (077)
-                    92-58293
+                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 text-red-700">
+                  <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-medium text-sm">
+                      Failed to Send Message
+                    </div>
+                    <div className="text-xs mt-1">
+                      Please try again or contact us directly via phone: (077)
+                      92-58293
+                    </div>
                   </div>
                 </div>
               )}
@@ -309,17 +544,20 @@ const Contact = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full"
+                  className="w-full flex items-center justify-center gap-2"
                   disabled={isSubmitting || !isEmailJSReady}
                   aria-label="Send rice order inquiry"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       Sending...
                     </>
                   ) : (
-                    "Send Message"
+                    <>
+                      <Send className="w-4 h-4" />
+                      Send Message
+                    </>
                   )}
                 </Button>
               </form>
@@ -330,10 +568,11 @@ const Contact = () => {
                 itemScope
                 itemType="https://schema.org/OpeningHoursSpecification"
               >
-                <h5 className="text-lg font-semibold text-green-800 mb-3">
+                <h5 className="font-semibold text-green-800 mb-3 flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
                   Business Hours
                 </h5>
-                <div className="space-y-2 text-sm md:text-base text-green-700">
+                <div className="space-y-2 text-sm text-green-700">
                   <div className="flex justify-between">
                     <span>Monday - Friday:</span>
                     <span className="font-medium">8:00 AM - 6:00 PM</span>
@@ -352,13 +591,11 @@ const Contact = () => {
 
             {/* Map and Contact Info */}
             <div className="order-1 lg:order-2">
-              <h3 className="text-lg font-semibold mb-6 text-green-900">
-                Find Us
-              </h3>
+              <h3 className="text-xl font-bold mb-6 text-green-900">Find Us</h3>
 
-              {/* Map */}
-              <div className="mb-6 relative overflow-hidden rounded-lg shadow-md">
-                <LeafletMap
+              {/* Map with fixed z-index */}
+              <div className="mb-6">
+                <FixedLeafletMap
                   lat={7.398382}
                   lng={80.006091}
                   zoom={15}
@@ -371,53 +608,91 @@ const Contact = () => {
               <div className="space-y-4">
                 <a
                   href={`mailto:${companyInfo.email}`}
-                  className="block p-4 bg-white rounded-lg border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all"
+                  className="flex items-center gap-4 p-4 bg-white rounded-lg border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all group"
                   itemScope
                   itemType="https://schema.org/ContactPoint"
                   aria-label="Send email for rice orders"
                 >
-                  <div className="font-semibold text-gray-900 mb-1">
-                    Email Orders
+                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-amber-200 transition-colors">
+                    <Mail className="w-6 h-6 text-amber-600" />
                   </div>
-                  <div
-                    className="text-amber-700 text-sm md:text-base"
-                    itemProp="email"
-                  >
-                    {companyInfo.email}
+                  <div>
+                    <div className="font-semibold text-gray-900">
+                      Email Orders
+                    </div>
+                    <div className="text-amber-700 text-sm" itemProp="email">
+                      {companyInfo.email}
+                    </div>
                   </div>
                 </a>
 
-                <a
-                  href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
-                  className="block p-4 bg-white rounded-lg border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all"
-                  itemScope
-                  itemType="https://schema.org/ContactPoint"
-                  aria-label="Call for immediate rice orders"
-                >
-                  <div className="font-semibold text-gray-900 mb-1">
-                    Call for Orders
+                <div className="bg-white rounded-lg border border-amber-200 p-4">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-6 h-6 text-amber-600" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900">
+                        Call for Orders
+                      </div>
+                      <div className="text-gray-600 text-xs">
+                        Multiple lines available
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    className="text-amber-700 text-sm md:text-base"
-                    itemProp="telephone"
-                  >
-                    {companyInfo.phone}
+
+                  <div className="space-y-2 ml-16">
+                    <a
+                      href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
+                      className="block text-amber-700 text-sm hover:text-amber-800 transition-colors"
+                      itemScope
+                      itemType="https://schema.org/ContactPoint"
+                      aria-label="Call primary phone number for rice orders"
+                    >
+                      <span itemProp="telephone">{companyInfo.phone}</span>{" "}
+                      (Primary)
+                    </a>
+
+                    <a
+                      href={`tel:${companyInfo.phone1.replace(/[^0-9]/g, "")}`}
+                      className="block text-amber-700 text-sm hover:text-amber-800 transition-colors"
+                      itemScope
+                      itemType="https://schema.org/ContactPoint"
+                      aria-label="Call secondary phone number for rice orders"
+                    >
+                      <span itemProp="telephone">{companyInfo.phone1}</span>{" "}
+                      (Secondary)
+                    </a>
+
+                    <a
+                      href={`tel:${companyInfo.phone2.replace(/[^0-9]/g, "")}`}
+                      className="block text-amber-700 text-sm hover:text-amber-800 transition-colors"
+                      itemScope
+                      itemType="https://schema.org/ContactPoint"
+                      aria-label="Call third phone number for rice orders"
+                    >
+                      <span itemProp="telephone">{companyInfo.phone2}</span>{" "}
+                      (Alternative)
+                    </a>
                   </div>
-                </a>
+                </div>
 
                 <div
-                  className="p-4 bg-white rounded-lg border border-gray-200"
+                  className="flex items-start gap-4 p-4 bg-white rounded-lg border border-gray-200"
                   itemScope
                   itemType="https://schema.org/PostalAddress"
                 >
-                  <div className="font-semibold text-gray-900 mb-1">
-                    Location
+                  <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <MapPin className="w-6 h-6 text-amber-600" />
                   </div>
-                  <div
-                    className="text-gray-700 text-sm md:text-base leading-relaxed"
-                    itemProp="address"
-                  >
-                    {companyInfo.address}
+                  <div>
+                    <div className="font-semibold text-gray-900">Location</div>
+                    <div
+                      className="text-gray-700 text-sm leading-relaxed"
+                      itemProp="address"
+                    >
+                      {companyInfo.address}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -427,28 +702,70 @@ const Contact = () => {
           {/* Bottom CTA */}
           <div className="text-center">
             <div className="bg-gradient-to-r from-green-600 to-amber-600 rounded-xl p-8 text-white shadow-xl">
-              <h3 className="text-xl font-semibold mb-4">
+              <h3 className="text-2xl font-bold mb-4">
                 Ready to Order Premium Rice?
               </h3>
-              <p className="text-green-100 mb-6 text-sm md:text-base max-w-2xl mx-auto">
+              <p className="text-green-100 mb-6 text-lg max-w-2xl mx-auto">
                 Get in touch with us today for bulk rice orders, wholesale
                 pricing, and fast delivery across Sri Lanka
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
                 <a
                   href={`mailto:${companyInfo.email}?subject=Rice Order Inquiry&body=Hello, I would like to inquire about rice orders. Please provide pricing and availability for:`}
-                  className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white text-green-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl text-sm md:text-base"
+                  className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-white text-green-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl"
                   aria-label="Send email inquiry for rice orders"
                 >
+                  <Mail className="w-5 h-5 mr-2" />
                   Email Order
                 </a>
-                <a
-                  href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
-                  className="flex-1 inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors text-sm md:text-base"
-                  aria-label="Call now for immediate rice orders"
-                >
-                  Call Now
-                </a>
+
+                <div className="flex-1 flex flex-col gap-2 sm:flex-row sm:gap-2">
+                  <a
+                    href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`}
+                    className="flex-1 inline-flex items-center justify-center px-4 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors text-sm"
+                    aria-label="Call primary number for immediate rice orders"
+                    title="Primary Phone"
+                  >
+                    <Phone className="w-4 h-4 mr-1" />
+                    Call Now
+                  </a>
+
+                  <div className="relative group">
+                    <button
+                      className="w-full sm:w-auto px-3 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors text-sm"
+                      aria-label="Show more phone numbers"
+                    >
+                      <Phone className="w-4 h-4" />
+                    </button>
+
+                    <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg border border-gray-200 p-3 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
+                      <div className="text-xs text-gray-600 mb-2 font-medium">
+                        More Numbers:
+                      </div>
+                      <div className="space-y-1">
+                        <a
+                          href={`tel:${companyInfo.phone1.replace(
+                            /[^0-9]/g,
+                            ""
+                          )}`}
+                          className="block text-green-600 hover:text-green-700 text-sm"
+                        >
+                          {companyInfo.phone1}
+                        </a>
+                        <a
+                          href={`tel:${companyInfo.phone2.replace(
+                            /[^0-9]/g,
+                            ""
+                          )}`}
+                          className="block text-green-600 hover:text-green-700 text-sm"
+                        >
+                          {companyInfo.phone2}
+                        </a>
+                      </div>
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

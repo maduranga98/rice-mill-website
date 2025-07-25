@@ -41,6 +41,7 @@ export const metadata = {
     "samba rice",
     "white rice Sri Lanka",
     "red rice Sri Lanka",
+    "rice mills in sri lanka",
 
     // Sinhala keywords
     "කැකුළු",
