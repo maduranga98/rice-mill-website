@@ -729,42 +729,6 @@ const Contact = () => {
                     <Phone className="w-4 h-4 mr-1" />
                     Call Now
                   </a>
-
-                  <div className="relative group">
-                    <button
-                      className="w-full sm:w-auto px-3 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors text-sm"
-                      aria-label="Show more phone numbers"
-                    >
-                      <Phone className="w-4 h-4" />
-                    </button>
-
-                    <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg border border-gray-200 p-3 opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
-                      <div className="text-xs text-gray-600 mb-2 font-medium">
-                        More Numbers:
-                      </div>
-                      <div className="space-y-1">
-                        <a
-                          href={`tel:${companyInfo.phone1.replace(
-                            /[^0-9]/g,
-                            ""
-                          )}`}
-                          className="block text-green-600 hover:text-green-700 text-sm"
-                        >
-                          {companyInfo.phone1}
-                        </a>
-                        <a
-                          href={`tel:${companyInfo.phone2.replace(
-                            /[^0-9]/g,
-                            ""
-                          )}`}
-                          className="block text-green-600 hover:text-green-700 text-sm"
-                        >
-                          {companyInfo.phone2}
-                        </a>
-                      </div>
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
