@@ -10,7 +10,21 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+  preload: true,
 });
+
+// ✅ NEW: Separate viewport export (Next.js 14+ requirement)
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#15803d" },
+    { media: "(prefers-color-scheme: dark)", color: "#15803d" },
+  ],
+  colorScheme: "light",
+};
 
 export const metadata = {
   title: {
@@ -70,20 +84,20 @@ export const metadata = {
     telephone: false,
   },
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
   ),
   alternates: {
     canonical: "/",
     languages: {
-      en: "/",
-      si: "/", // Sinhala
-      ta: "/", // Tamil
+      "en-US": "/",
+      "si-LK": "/", // Sinhala
+      "ta-LK": "/", // Tamil
     },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com",
     title:
       "Sajith Rice Mill - Premium Sri Lankan Rice | සුදු කැකුළු & සම්බා කැකුළු",
     description:
@@ -95,21 +109,28 @@ export const metadata = {
         width: 1200,
         height: 630,
         alt: "Sajith Rice Mill - Premium Sri Lankan Rice - සුදු කැකුළු සම්බා කැකුළු",
+        type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@SajithRiceMill",
+    creator: "@SajithRiceMill",
     title: "Sajith Rice Mill - Premium Sri Lankan Rice | Best Price කැකුළු",
     description:
       "J.A. Santha Nimal's premium rice mill. සුදු කැකුළු, සම්බා කැකුළු, රතු කැකුළු at best prices. Chemical-free traditional rice since 2009.",
-    images: ["/og-image.jpg"],
-    creator: "@SajithRiceMill",
+    images: [
+      {
+        url: "/og-image.jpg",
+        alt: "Sajith Rice Mill Premium Rice Products",
+      },
+    ],
   },
   robots: {
     index: true,
     follow: true,
-    nocache: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -122,25 +143,17 @@ export const metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+    bing: process.env.NEXT_PUBLIC_BING_VERIFICATION,
   },
   category: "food",
   classification: "business",
   referrer: "origin-when-cross-origin",
-  colorScheme: "light",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#15803d" },
-    { media: "(prefers-color-scheme: dark)", color: "#15803d" },
-  ],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
   manifest: "/manifest.json",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
@@ -150,52 +163,98 @@ export const metadata = {
         url: "/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
+        rel: "android-chrome-icon",
       },
       {
         url: "/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
+        rel: "android-chrome-icon",
       },
     ],
   },
+  // Additional SEO improvements
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Sajith Rice Mill",
+    "application-name": "Sajith Rice Mill",
+    "msapplication-TileColor": "#15803d",
+    "msapplication-TileImage": "/android-chrome-192x192.png",
+    "theme-color": "#15803d",
+  },
 };
 
-// Enhanced JSON-LD Structured Data with Sinhala keywords
-const structuredData = {
+// Enhanced JSON-LD Structured Data with better organization
+const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+  }/#organization`,
   name: "Sajith Rice Mill",
   alternateName: [
-    "Sajith Rice Mill.",
     "Santha Nimal Rice Mill",
     "සජිත් සහල් මෝල",
+    "J.A. Santha Nimal Rice Mill",
   ],
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com",
   logo: {
     "@type": "ImageObject",
     url: `${
-      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
     }/logo-512x512.png`,
     width: 512,
     height: 512,
+    caption: "Sajith Rice Mill Logo",
   },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+94-77-925-8293",
-    contactType: "customer service",
-    areaServed: "LK",
-    availableLanguage: ["English", "Sinhala", "Tamil"],
-    hoursAvailable: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "08:00",
-      closes: "18:00",
+  image: [
+    {
+      "@type": "ImageObject",
+      url: `${
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+      }/og-image.jpg`,
+      width: 1200,
+      height: 630,
+      caption: "Sajith Rice Mill - Premium Sri Lankan Rice Products",
     },
-  },
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+94-77-925-8293",
+      contactType: "customer service",
+      areaServed: "LK",
+      availableLanguage: ["English", "Sinhala", "Tamil"],
+      hoursAvailable: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "08:00",
+          closes: "18:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: "Saturday",
+          opens: "08:00",
+          closes: "16:00",
+        },
+      ],
+    },
+    {
+      "@type": "ContactPoint",
+      email: "sajithricemill@gmail.com",
+      contactType: "sales",
+      areaServed: "LK",
+      availableLanguage: ["English", "Sinhala", "Tamil"],
+    },
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress: "Nadalagamuwa, Wadumunnegedara",
-    addressLocality: "North Western Province",
+    addressLocality: "Wadumunnegedara",
+    addressRegion: "North Western Province",
     addressCountry: "LK",
     postalCode: "60170",
   },
@@ -204,7 +263,7 @@ const structuredData = {
     latitude: 7.398382,
     longitude: 80.006091,
   },
-  foundingDate: "2009-12",
+  foundingDate: "2009-12-01",
   founder: {
     "@type": "Person",
     name: "J.A. Santha Nimal",
@@ -219,63 +278,6 @@ const structuredData = {
   priceRange: "$$",
   paymentAccepted: ["Cash", "Bank Transfer", "Mobile Payment"],
   currenciesAccepted: "LKR",
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Premium Rice Products - ප්‍රිමියම් සහල් නිෂ්පාදන",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Sudu Kakulu Rice - සුදු කැකුළු",
-          description:
-            "Premium white raw rice, chemical-free and organic. Available in 5kg, 10kg, 25kg packs at best prices.",
-          category: "Food & Beverages",
-          brand: "Sajith Rice Mill",
-          offers: {
-            "@type": "Offer",
-            availability: "InStock",
-            priceRange: "Best Price",
-            priceCurrency: "LKR",
-          },
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Samba Kakulu Rice - සම්බා කැකුළු",
-          description:
-            "Premium aromatic rice with firm texture. Traditional samba variety at best prices.",
-          category: "Food & Beverages",
-          brand: "Sajith Rice Mill",
-          offers: {
-            "@type": "Offer",
-            availability: "InStock",
-            priceRange: "Best Price",
-            priceCurrency: "LKR",
-          },
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Product",
-          name: "Ratu Kakulu Rice - රතු කැකුළු",
-          description:
-            "Traditional red rice variety, rich in nutrients and authentic flavor.",
-          category: "Food & Beverages",
-          brand: "Sajith Rice Mill",
-          offers: {
-            "@type": "Offer",
-            availability: "InStock",
-            priceRange: "Best Price",
-            priceCurrency: "LKR",
-          },
-        },
-      },
-    ],
-  },
   areaServed: [
     {
       "@type": "Country",
@@ -284,6 +286,10 @@ const structuredData = {
     {
       "@type": "State",
       name: "North Western Province",
+    },
+    {
+      "@type": "State",
+      name: "Western Province",
     },
   ],
   serviceArea: [
@@ -297,25 +303,6 @@ const structuredData = {
     "Kotugoda",
     "Marandagahamula",
   ],
-  makesOffer: [
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Bulk Rice Supply - තොග සහල් සැපයුම",
-        description:
-          "Wholesale rice supply for restaurants, hotels and large households at best prices",
-      },
-    },
-    {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Island-wide Delivery - දිවයින පුරා බෙදාහැරීම",
-        description: "Rice delivery service across Sri Lanka",
-      },
-    },
-  ],
   knowsAbout: [
     "Rice cultivation",
     "Organic farming",
@@ -324,25 +311,35 @@ const structuredData = {
     "ඔර්ගනික් ගොවිතැන",
     "සම්ප්‍රදායික සහල් වර්ග",
   ],
+  sameAs: [
+    // Add social media URLs when available
+    // "https://www.facebook.com/SajithRiceMill",
+    // "https://www.instagram.com/sajithricemill",
+  ],
 };
 
-const localBusinessData = {
+const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": `${
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
-  }/#business`,
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+  }/#localbusiness`,
   name: "Sajith Rice Mill",
   alternateName: "සජිත් සහල් මෝල",
-  image: `${
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
-  }/logo-512x512.png`,
+  image: [
+    `${
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+    }/logo-512x512.png`,
+    `${
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+    }/og-image.jpg`,
+  ],
   telephone: "+94-77-925-8293",
   email: "sajithricemill@gmail.com",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Nadalagamuwa, Wadumunnegedara",
-    addressLocality: "North Western Province",
+    addressLocality: "Wadumunnegedara",
     addressRegion: "North Western Province",
     addressCountry: "LK",
     postalCode: "60170",
@@ -352,11 +349,24 @@ const localBusinessData = {
     latitude: 7.398382,
     longitude: 80.006091,
   },
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
-  openingHours: ["Mo-Fr 08:00-18:00", "Sa 08:00-16:00"],
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "08:00",
+      closes: "16:00",
+    },
+  ],
   priceRange: "$$",
   servesCuisine: "Sri Lankan",
-  paymentAccepted: ["Cash", "Bank Transfer"],
+  paymentAccepted: ["Cash", "Bank Transfer", "Mobile Payment"],
   currenciesAccepted: "LKR",
   hasMap: `https://maps.google.com/?q=7.398382,80.006091`,
   aggregateRating: {
@@ -368,7 +378,37 @@ const localBusinessData = {
   },
 };
 
-const breadcrumbData = {
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+  }/#website`,
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com",
+  name: "Sajith Rice Mill",
+  description:
+    "Premium Sri Lankan rice supplier offering chemical-free traditional rice varieties",
+  publisher: {
+    "@id": `${
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+    }/#organization`,
+  },
+  potentialAction: [
+    {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${
+          process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+        }/#products?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  ],
+  inLanguage: ["en-US", "si-LK", "ta-LK"],
+};
+
+const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
@@ -377,14 +417,14 @@ const breadcrumbData = {
       position: 1,
       name: "Home",
       item:
-        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/",
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Products",
       item: `${
-        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
       }/#products`,
     },
     {
@@ -392,9 +432,67 @@ const breadcrumbData = {
       position: 3,
       name: "Contact",
       item: `${
-        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com/"
+        process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
       }/#contact`,
     },
+  ],
+};
+
+// Product catalog schema
+const productCatalogSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Premium Rice Products - ප්‍රිමියම් සහල් නිෂ්පාදන",
+  description: "Complete range of traditional Sri Lankan rice varieties",
+  numberOfItems: 6,
+  itemListElement: [
+    {
+      "@type": "Product",
+      position: 1,
+      name: "Sudu Kakulu Rice 5kg - සුදු කැකුළු",
+      description:
+        "Premium white raw rice, chemical-free and organic. 5kg pack at best price.",
+      category: "Food & Beverages > Rice",
+      brand: {
+        "@type": "Brand",
+        name: "Sajith Rice Mill",
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        priceRange: "Best Price",
+        priceCurrency: "LKR",
+        seller: {
+          "@id": `${
+            process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+          }/#organization`,
+        },
+      },
+    },
+    {
+      "@type": "Product",
+      position: 2,
+      name: "Samba Kakulu Rice 5kg - සම්බා කැකුළු",
+      description:
+        "Premium aromatic rice with firm texture. Traditional samba variety 5kg pack.",
+      category: "Food & Beverages > Rice",
+      brand: {
+        "@type": "Brand",
+        name: "Sajith Rice Mill",
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        priceRange: "Best Price",
+        priceCurrency: "LKR",
+        seller: {
+          "@id": `${
+            process.env.NEXT_PUBLIC_SITE_URL || "https://www.sajithricemill.com"
+          }/#organization`,
+        },
+      },
+    },
+    // Add more products as needed
   ],
 };
 
@@ -402,27 +500,39 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable}`}>
       <head>
-        {/* Structured Data */}
+        {/* Enhanced Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
+            __html: JSON.stringify(organizationSchema),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessData),
+            __html: JSON.stringify(localBusinessSchema),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbData),
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(productCatalogSchema),
           }}
         />
 
-        {/* Additional Meta Tags */}
+        {/* Enhanced Meta Tags */}
         <meta name="geo.region" content="LK" />
         <meta
           name="geo.placename"
@@ -440,12 +550,13 @@ export default function RootLayout({ children }) {
         <meta name="business-type" content="Rice Mill, Food Production" />
         <meta name="established" content="2009" />
 
-        {/* DNS Prefetch */}
+        {/* Enhanced DNS Prefetch and Preconnect */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="dns-prefetch" href="//clarity.ms" />
+        <link rel="dns-prefetch" href="//vitals.vercel-insights.com" />
 
-        {/* Preconnect */}
         <link
           rel="preconnect"
           href="https://fonts.googleapis.com"
@@ -456,17 +567,41 @@ export default function RootLayout({ children }) {
           href="https://fonts.gstatic.com"
           crossOrigin=""
         />
+
+        {/* Resource Hints for Performance */}
+        <link rel="preload" href="/hero1.webp" as="image" type="image/webp" />
+        <link rel="prefetch" href="/hero2.webp" as="image" type="image/webp" />
+        <link rel="prefetch" href="/hero3.webp" as="image" type="image/webp" />
+
+        {/* Security Headers */}
+        <meta name="referrer" content="origin-when-cross-origin" />
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+
+        {/* Performance Optimization */}
+        <meta
+          name="format-detection"
+          content="telephone=no, date=no, email=no, address=no"
+        />
       </head>
+
       <body
-        className={`${inter.className} antialiased`}
+        className={`${inter.className} antialiased bg-white text-gray-900`}
         suppressHydrationWarning={true}
       >
-        {/* Google Analytics */}
+        {/* Enhanced Google Analytics with better error handling */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
               strategy="afterInteractive"
+              onLoad={() => {
+                console.log("Google Analytics loaded successfully");
+              }}
+              onError={() => {
+                console.warn("Failed to load Google Analytics");
+              }}
             />
             <Script id="google-analytics" strategy="afterInteractive">
               {`
@@ -480,16 +615,37 @@ export default function RootLayout({ children }) {
                     'dimension1': 'rice_type',
                     'dimension2': 'package_size',
                     'dimension3': 'location'
-                  }
+                  },
+                  // Enhanced ecommerce tracking
+                  send_page_view: true,
+                  anonymize_ip: true,
+                  cookie_expires: 63072000, // 2 years
+                });
+                
+                // Track enhanced ecommerce events
+                gtag('event', 'page_view', {
+                  page_title: document.title,
+                  page_location: window.location.href,
+                  content_group1: 'Rice Products',
+                  content_group2: 'Sri Lankan Food',
                 });
               `}
             </Script>
           </>
         )}
 
-        {/* Microsoft Clarity */}
+        {/* Enhanced Microsoft Clarity with error handling */}
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
-          <Script id="microsoft-clarity" strategy="afterInteractive">
+          <Script
+            id="microsoft-clarity"
+            strategy="afterInteractive"
+            onLoad={() => {
+              console.log("Microsoft Clarity loaded successfully");
+            }}
+            onError={() => {
+              console.warn("Failed to load Microsoft Clarity");
+            }}
+          >
             {`
               (function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -500,12 +656,45 @@ export default function RootLayout({ children }) {
           </Script>
         )}
 
+        {/* Skip to main content for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-green-600 text-white px-4 py-2 rounded-md z-50"
+        >
+          Skip to main content
+        </a>
+
         <Navbar />
-        <main role="main" itemScope itemType="https://schema.org/WebPage">
+
+        <main
+          id="main-content"
+          role="main"
+          itemScope
+          itemType="https://schema.org/WebPage"
+          className="min-h-screen"
+        >
           {children}
         </main>
+
         <Footer />
+
+        {/* Performance monitoring */}
         <SpeedInsights />
+
+        {/* Service Worker Registration for PWA */}
+        <Script id="service-worker-registration" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                  console.log('SW registered: ', registration);
+                }).catch(function(registrationError) {
+                  console.log('SW registration failed: ', registrationError);
+                });
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );
